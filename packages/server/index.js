@@ -608,6 +608,8 @@ class ConcoxV5Server {
     log(`📤 Sent command to ${imei}`, {
       command: command,
       hex: packet.toString("hex").toUpperCase(),
+      protocol: "0x80",
+      note: "Waiting for device response (protocol 0x21 or 0x15)",
     });
 
     return true;
