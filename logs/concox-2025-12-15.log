@@ -1,0 +1,2991 @@
+[2025-12-15T05:58:33.180Z] 📡 Concox V5 Server started on port 5027
+[2025-12-15T05:58:33.182Z] 📝 Logging to: logs/concox-2025-12-15.log
+[2025-12-15T05:58:37.491Z] 🔌 New connection from ::ffff:223.182.27.74:4608
+[2025-12-15T05:58:37.606Z] 📦 Received packet from ::ffff:223.182.27.74:4608
+{
+  "protocol": "0x01",
+  "protocolName": "Login Information",
+  "length": 22,
+  "rawHex": "78781101035517210746947880662121048B86B60D0A"
+}
+[2025-12-15T05:58:37.607Z] 🔐 Login packet
+{
+  "imei": "355172107469478",
+  "client": "::ffff:223.182.27.74:4608",
+  "serialNumber": "0x048B",
+  "imeiBytes": "0355172107469478"
+}
+[2025-12-15T05:58:37.607Z] ✅ Login acknowledged
+{
+  "imei": "355172107469478",
+  "ackHex": "78780501048B95EE0D0A"
+}
+[2025-12-15T05:58:37.996Z] 🔌 New connection from ::ffff:223.182.15.47:8192
+[2025-12-15T05:58:38.008Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A134506040002048C1A8C0D0A"
+}
+[2025-12-15T05:58:38.009Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x048C"
+}
+[2025-12-15T05:58:38.261Z] 📦 Received packet from ::ffff:223.182.15.47:8192
+{
+  "protocol": "0x01",
+  "protocolName": "Login Information",
+  "length": 22,
+  "rawHex": "78781101035517210746105380662121041247C30D0A"
+}
+[2025-12-15T05:58:38.261Z] 🔐 Login packet
+{
+  "imei": "355172107461053",
+  "client": "::ffff:223.182.15.47:8192",
+  "serialNumber": "0x0412",
+  "imeiBytes": "0355172107461053"
+}
+[2025-12-15T05:58:38.262Z] ✅ Login acknowledged
+{
+  "imei": "355172107461053",
+  "ackHex": "7878050104129CA60D0A"
+}
+[2025-12-15T05:58:38.327Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x94",
+  "protocolName": "Information Transmission Packet",
+  "length": 14,
+  "rawHex": "7979000894001495048D33250D0A"
+}
+[2025-12-15T05:58:38.327Z] 📊 Information Transmission
+{
+  "imei": "355172107469478",
+  "subProtocol": "0x00",
+  "packetHex": "7979000894001495048D33250D0A"
+}
+[2025-12-15T05:58:38.327Z] 🔋 External Voltage: 52.69V
+[2025-12-15T05:58:38.879Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13040604000204132E210D0A"
+}
+[2025-12-15T05:58:38.880Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0413"
+}
+[2025-12-15T05:58:39.497Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x26",
+  "protocolName": "Alarm Data (UTC)",
+  "length": 42,
+  "rawHex": "78782526190C0F05351FC301DF44740868B8B2010497090194EA4F2E005D9A0C060403020410C1080D0A"
+}
+[2025-12-15T05:58:39.498Z] 🚨 Alarm
+{
+  "imei": "355172107461053",
+  "alarmType": "Vibration Alarm",
+  "timestamp": "2025-12-15 05:53:31"
+}
+[2025-12-15T05:58:39.855Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x94",
+  "protocolName": "Information Transmission Packet",
+  "length": 14,
+  "rawHex": "79790008940003F8040FFA8D0D0A"
+}
+[2025-12-15T05:58:39.856Z] 📊 Information Transmission
+{
+  "imei": "355172107461053",
+  "subProtocol": "0x00",
+  "packetHex": "79790008940003F8040FFA8D0D0A"
+}
+[2025-12-15T05:58:39.856Z] 🔋 External Voltage: 10.16V
+[2025-12-15T05:58:40.517Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x94",
+  "protocolName": "Information Transmission Packet",
+  "length": 14,
+  "rawHex": "79790008940003E4041123440D0A"
+}
+[2025-12-15T05:58:40.517Z] 📊 Information Transmission
+{
+  "imei": "355172107461053",
+  "subProtocol": "0x00",
+  "packetHex": "79790008940003E4041123440D0A"
+}
+[2025-12-15T05:58:40.517Z] 🔋 External Voltage: 9.96V
+[2025-12-15T05:58:40.977Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x94",
+  "protocolName": "Information Transmission Packet",
+  "length": 14,
+  "rawHex": "79790008940003E4041474E90D0A"
+}
+[2025-12-15T05:58:40.978Z] 📊 Information Transmission
+{
+  "imei": "355172107461053",
+  "subProtocol": "0x00",
+  "packetHex": "79790008940003E4041474E90D0A"
+}
+[2025-12-15T05:58:40.978Z] 🔋 External Voltage: 9.96V
+[2025-12-15T05:58:41.356Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F053A26C301DF44740868B8B20004970194EA4F2E005D9A000E000000182004158A7A0D0A"
+}
+[2025-12-15T05:58:41.357Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T05:58:41.357Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 05:58:38",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T05:59:03.062Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F053B01C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149048E91ED0D0A"
+}
+[2025-12-15T05:59:03.063Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T05:59:03.063Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 05:59:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T05:59:10.300Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F053B09C301DF44740868B8B20004970194EA4F2E005D9A000E00000018200416AEA10D0A"
+}
+[2025-12-15T05:59:10.300Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T05:59:10.300Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 05:59:09",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T05:59:34.227Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F053B20C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149048F9EB30D0A"
+}
+[2025-12-15T05:59:34.228Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T05:59:34.228Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 05:59:32",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T05:59:38.324Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1345060400020490C0610D0A"
+}
+[2025-12-15T05:59:38.325Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x0490"
+}
+[2025-12-15T05:59:39.378Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130406040002041768050D0A"
+}
+[2025-12-15T05:59:39.379Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0417"
+}
+[2025-12-15T05:59:41.260Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F053B28C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820041859080D0A"
+}
+[2025-12-15T05:59:41.261Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T05:59:41.261Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 05:59:40",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:00:03.947Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060002C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904918B370D0A"
+}
+[2025-12-15T06:00:03.948Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:00:03.948Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:00:02",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:00:12.617Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06000BC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820041984090D0A"
+}
+[2025-12-15T06:00:12.618Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:00:12.618Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:00:11",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:00:33.845Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060020C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E00000001490492C66E0D0A"
+}
+[2025-12-15T06:00:33.846Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:00:33.846Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:00:32",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:00:38.265Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1345050400020493FE870D0A"
+}
+[2025-12-15T06:00:38.265Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "High",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x0493"
+}
+[2025-12-15T06:00:38.921Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130406040002041AB3E00D0A"
+}
+[2025-12-15T06:00:38.921Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x041A"
+}
+[2025-12-15T06:00:43.419Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06002AC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820041BB9CC0D0A"
+}
+[2025-12-15T06:00:43.419Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:00:43.420Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:00:42",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:01:03.567Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060101C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149049478BB0D0A"
+}
+[2025-12-15T06:01:03.568Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:01:03.568Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:01:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:01:14.562Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06010DC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820041CD4BA0D0A"
+}
+[2025-12-15T06:01:14.563Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:01:14.563Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:01:13",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:01:33.467Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06011FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E00000001490495BB830D0A"
+}
+[2025-12-15T06:01:33.468Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:01:33.468Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:01:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:01:38.325Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1345060400020496A5570D0A"
+}
+[2025-12-15T06:01:38.326Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x0496"
+}
+[2025-12-15T06:01:38.939Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130406040002041DC75F0D0A"
+}
+[2025-12-15T06:01:38.939Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x041D"
+}
+[2025-12-15T06:01:45.178Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06012CC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820041EE97F0D0A"
+}
+[2025-12-15T06:01:45.178Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:01:45.179Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:01:44",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:02:03.287Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060201C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904970D6D0D0A"
+}
+[2025-12-15T06:02:03.288Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:02:03.288Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:02:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:02:16.421Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06020FC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820041FE08A0D0A"
+}
+[2025-12-15T06:02:16.421Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:02:16.422Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:02:15",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:02:33.208Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06021FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E00000001490498272B0D0A"
+}
+[2025-12-15T06:02:33.208Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:02:33.208Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:02:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:02:38.462Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204995DA00D0A"
+}
+[2025-12-15T06:02:38.463Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x0499"
+}
+[2025-12-15T06:02:38.980Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13040604000204202D390D0A"
+}
+[2025-12-15T06:02:38.981Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0420"
+}
+[2025-12-15T06:02:47.679Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06022EC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820042126A00D0A"
+}
+[2025-12-15T06:02:47.679Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:02:47.679Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:02:46",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:03:03.028Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060301C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149049A13BC0D0A"
+}
+[2025-12-15T06:03:03.029Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:03:03.029Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:03:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:03:18.316Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060311C301DF44740868B8B20004970194EA4F2E005D9A000E000000182004221D690D0A"
+}
+[2025-12-15T06:03:18.316Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:03:18.316Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:03:17",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:03:32.868Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06031FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149049BD0840D0A"
+}
+[2025-12-15T06:03:32.868Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:03:32.868Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:03:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:03:38.307Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A134506040002049C0A0D0D0A"
+}
+[2025-12-15T06:03:38.307Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x049C"
+}
+[2025-12-15T06:03:38.939Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13040604000204231FA20D0A"
+}
+[2025-12-15T06:03:38.939Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0423"
+}
+[2025-12-15T06:03:49.541Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060330C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820042466880D0A"
+}
+[2025-12-15T06:03:49.542Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:03:49.542Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:03:48",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:04:03.826Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060402C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149049D4DB80D0A"
+}
+[2025-12-15T06:04:03.826Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:04:03.826Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:04:02",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:04:20.278Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060413C301DF44740868B8B20004970194EA4F2E005D9A000E00000018200425639E0D0A"
+}
+[2025-12-15T06:04:20.278Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:04:20.278Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:04:19",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:04:33.748Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060420C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E0000000149049E00E10D0A"
+}
+[2025-12-15T06:04:33.748Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:04:33.748Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:04:32",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:04:38.326Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A134506040002049F38960D0A"
+}
+[2025-12-15T06:04:38.326Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x049F"
+}
+[2025-12-15T06:04:38.939Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1304060400020426480F0D0A"
+}
+[2025-12-15T06:04:38.939Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0426"
+}
+[2025-12-15T06:04:51.480Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060432C301DF44740868B8B20004970194EA4F2E005D9A000E000000182004275E5B0D0A"
+}
+[2025-12-15T06:04:51.480Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:04:51.480Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:04:50",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:05:03.569Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060501C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A003FF0D0A"
+}
+[2025-12-15T06:05:03.570Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:05:03.570Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:05:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:05:22.721Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060515C301DF44740868B8B20004970194EA4F2E005D9A000E00000018200428BF650D0A"
+}
+[2025-12-15T06:05:22.721Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:05:22.721Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:05:21",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:05:33.464Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06051FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A1C0C70D0A"
+}
+[2025-12-15T06:05:33.465Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:05:33.465Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:05:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:05:38.223Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204A2D2F00D0A"
+}
+[2025-12-15T06:05:38.223Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04A2"
+}
+[2025-12-15T06:05:39.016Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1304060400020429B0F80D0A"
+}
+[2025-12-15T06:05:39.016Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0429"
+}
+[2025-12-15T06:05:54.317Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060535C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820042AA2530D0A"
+}
+[2025-12-15T06:05:54.318Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:05:54.318Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:05:53",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:06:03.245Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060601C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A376290D0A"
+}
+[2025-12-15T06:06:03.247Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:06:03.247Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:06:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:06:25.619Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060618C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820042B66050D0A"
+}
+[2025-12-15T06:06:25.619Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:06:25.619Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:06:24",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:06:33.226Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06061FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A4D0270D0A"
+}
+[2025-12-15T06:06:33.227Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:06:33.227Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:06:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:06:38.307Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204A5A64F0D0A"
+}
+[2025-12-15T06:06:38.308Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04A5"
+}
+[2025-12-15T06:06:38.956Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130406040002042CE7550D0A"
+}
+[2025-12-15T06:06:38.956Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x042C"
+}
+[2025-12-15T06:06:56.338Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060637C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820042DD0470D0A"
+}
+[2025-12-15T06:06:56.338Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:06:56.338Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:06:55",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:07:02.986Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060701C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A6E4B00D0A"
+}
+[2025-12-15T06:07:02.987Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:07:02.987Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:07:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:07:27.496Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06071AC301DF44740868B8B20004970194EA4F2E005D9A000E0000001820042EB57A0D0A"
+}
+[2025-12-15T06:07:27.497Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:07:27.497Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:07:26",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:07:33.004Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06071FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A727880D0A"
+}
+[2025-12-15T06:07:33.004Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:07:33.004Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:07:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:07:38.366Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204A87DAA0D0A"
+}
+[2025-12-15T06:07:38.367Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04A8"
+}
+[2025-12-15T06:07:39.017Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130406040002042FD5CE0D0A"
+}
+[2025-12-15T06:07:39.017Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x042F"
+}
+[2025-12-15T06:07:58.239Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060739C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820043013B40D0A"
+}
+[2025-12-15T06:07:58.239Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:07:58.240Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:07:57",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:08:03.845Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060802C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904A92F3A0D0A"
+}
+[2025-12-15T06:08:03.845Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:08:03.845Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:08:02",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:08:29.357Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06081CC301DF44740868B8B20004970194EA4F2E005D9A000E00000018200431CD4E0D0A"
+}
+[2025-12-15T06:08:29.358Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:08:29.358Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:08:28",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:08:34.744Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060820C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904AA62630D0A"
+}
+[2025-12-15T06:08:34.744Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:08:34.744Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:08:32",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:08:38.343Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204AB4F310D0A"
+}
+[2025-12-15T06:08:38.344Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04AB"
+}
+[2025-12-15T06:08:38.607Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x94",
+  "protocolName": "Information Transmission Packet",
+  "length": 14,
+  "rawHex": "797900089400149504AC03AE0D0A"
+}
+[2025-12-15T06:08:38.607Z] 📊 Information Transmission
+{
+  "imei": "355172107469478",
+  "subProtocol": "0x00",
+  "packetHex": "797900089400149504AC03AE0D0A"
+}
+[2025-12-15T06:08:38.607Z] 🔋 External Voltage: 52.69V
+[2025-12-15T06:08:39.058Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13040604000204321EAA0D0A"
+}
+[2025-12-15T06:08:39.058Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0432"
+}
+[2025-12-15T06:08:39.315Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x94",
+  "protocolName": "Information Transmission Packet",
+  "length": 14,
+  "rawHex": "79790008940003D9043358850D0A"
+}
+[2025-12-15T06:08:39.316Z] 📊 Information Transmission
+{
+  "imei": "355172107461053",
+  "subProtocol": "0x00",
+  "packetHex": "79790008940003D9043358850D0A"
+}
+[2025-12-15T06:08:39.316Z] 🔋 External Voltage: 9.85V
+[2025-12-15T06:09:00.599Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06083BC301DF44740868B8B20004970194EA4F2E005D9A000E00000018200434461E0D0A"
+}
+[2025-12-15T06:09:00.600Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:09:00.600Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:08:59",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:09:03.531Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060901C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904ADCD3F0D0A"
+}
+[2025-12-15T06:09:03.532Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:09:03.537Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:09:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:09:31.302Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06091EC301DF44740868B8B20004970194EA4F2E005D9A000E000000182004350FB80D0A"
+}
+[2025-12-15T06:09:31.302Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:09:31.302Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:09:30",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:09:33.346Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F06091FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904AE2D150D0A"
+}
+[2025-12-15T06:09:33.346Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:09:33.347Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:09:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:09:38.366Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204AF09150D0A"
+}
+[2025-12-15T06:09:38.366Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04AF"
+}
+[2025-12-15T06:09:39.039Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1304060400020436588E0D0A"
+}
+[2025-12-15T06:09:39.039Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0436"
+}
+[2025-12-15T06:10:02.518Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060A01C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820043799A50D0A"
+}
+[2025-12-15T06:10:02.519Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:10:02.519Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:10:01",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:10:03.328Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060A01C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B041160D0A"
+}
+[2025-12-15T06:10:03.328Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:10:03.328Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:10:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:10:33.166Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060A1FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B1822E0D0A"
+}
+[2025-12-15T06:10:33.166Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:10:33.166Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:10:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:10:33.299Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060A20C301DF44740868B8B20004970194EA4F2E005D9A000E000000182004387F850D0A"
+}
+[2025-12-15T06:10:33.300Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:10:33.300Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:10:32",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:10:38.402Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204B2C2710D0A"
+}
+[2025-12-15T06:10:38.402Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04B2"
+}
+[2025-12-15T06:10:38.980Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A1304060400020439A0790D0A"
+}
+[2025-12-15T06:10:38.981Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0439"
+}
+[2025-12-15T06:11:03.007Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060B01C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B3B6B90D0A"
+}
+[2025-12-15T06:11:03.007Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:11:03.007Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:11:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:11:04.362Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060B03C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820043AC6920D0A"
+}
+[2025-12-15T06:11:04.362Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:11:04.362Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:11:03",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:11:33.965Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060B20C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B4DCD10D0A"
+}
+[2025-12-15T06:11:33.965Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:11:33.965Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:11:32",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:11:35.681Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060B22C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820043BC9CC0D0A"
+}
+[2025-12-15T06:11:35.682Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:11:35.682Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:11:34",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:11:38.369Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204B5B6CE0D0A"
+}
+[2025-12-15T06:11:38.369Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04B5"
+}
+[2025-12-15T06:11:39.058Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130405040002043CFBA90D0A"
+}
+[2025-12-15T06:11:39.058Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "High",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x043C"
+}
+[2025-12-15T06:12:03.765Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060C02C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B6CBAF0D0A"
+}
+[2025-12-15T06:12:03.765Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:12:03.765Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:12:02",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:12:07.360Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060C06C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820043D5ABC0D0A"
+}
+[2025-12-15T06:12:07.360Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:12:07.360Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:12:06",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:12:33.825Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060C20C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B7A5E40D0A"
+}
+[2025-12-15T06:12:33.825Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:12:33.826Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:12:32",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:12:38.403Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204B86D2B0D0A"
+}
+[2025-12-15T06:12:38.404Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04B8"
+}
+[2025-12-15T06:12:38.561Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060C25C301DF44740868B8B20004970194EA4F2E005D9A000E0000001820043E37160D0A"
+}
+[2025-12-15T06:12:38.562Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:12:38.562Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:12:37",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:12:38.919Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A130406040002043FC54F0D0A"
+}
+[2025-12-15T06:12:38.919Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x043F"
+}
+[2025-12-15T06:13:03.466Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060D01C801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904B997790D0A"
+}
+[2025-12-15T06:13:03.466Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:13:03.467Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:13:01",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:13:09.298Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060D08C301DF44740868B8B20004970194EA4F2E005D9A000E00000018200440FA490D0A"
+}
+[2025-12-15T06:13:09.299Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:13:09.299Z] 📍 GPS Location
+{
+  "imei": "355172107461053",
+  "timestamp": "2025-12-15 06:13:08",
+  "latitude": "17.449593",
+  "longitude": "78.378197",
+  "speed": 0,
+  "course": 151,
+  "satellites": 3,
+  "positioned": false,
+  "mileage_meters": 6176,
+  "mileage_km": "6.18",
+  "mileage_miles": "3.84",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:13:33.345Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x22",
+  "protocolName": "Positioning Data (UTC)",
+  "length": 43,
+  "rawHex": "78782622190C0F060D1FC801DF4B6D0868D7CB0014290194EA4F2E005D9A000E000000014904BA77530D0A"
+}
+[2025-12-15T06:13:33.345Z] 🕐 Raw date bytes
+{
+  "yearByte": "0x19 (25)",
+  "monthByte": "0x0c (12)",
+  "dayByte": "0x0f (15)",
+  "calculatedYear": 2025
+}
+[2025-12-15T06:13:33.346Z] 📍 GPS Location
+{
+  "imei": "355172107469478",
+  "timestamp": "2025-12-15 06:13:31",
+  "latitude": "17.450585",
+  "longitude": "78.382619",
+  "speed": 0,
+  "course": 41,
+  "satellites": 8,
+  "positioned": true,
+  "mileage_meters": 329,
+  "mileage_km": "0.33",
+  "mileage_miles": "0.20",
+  "acc": "Low (Off)",
+  "uploadMode": "GPS Dup Upload",
+  "gpsReupload": "Real-time",
+  "gpsRealTime": "Real-time GPS",
+  "lbs": {
+    "mcc": 404,
+    "mnc": 234,
+    "lac": 20270,
+    "cellId": 23962
+  }
+}
+[2025-12-15T06:13:38.307Z] 📦 Received packet from 355172107469478
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13450604000204BB5FB00D0A"
+}
+[2025-12-15T06:13:38.308Z] 💓 Heartbeat
+{
+  "imei": "355172107469478",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": true,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": true,
+  "serialNumber": "0x04BB"
+}
+[2025-12-15T06:13:38.919Z] 📦 Received packet from 355172107461053
+{
+  "protocol": "0x13",
+  "protocolName": "Heartbeat Packet",
+  "length": 15,
+  "rawHex": "78780A13040604000204415FB60D0A"
+}
+[2025-12-15T06:13:38.919Z] 💓 Heartbeat
+{
+  "imei": "355172107461053",
+  "battery": "Full",
+  "signal": "Strong",
+  "gpsTracking": false,
+  "accHigh": false,
+  "charging": true,
+  "oilElectricityStatus": "MOBILIZED (Connected)",
+  "defenseActivated": false,
+  "serialNumber": "0x0441"
+}
+[2025-12-15T06:13:39.151Z] SIGINT received, shutting down...
+[2025-12-15T06:13:39.151Z] 🛑 Concox V5 Server stopped

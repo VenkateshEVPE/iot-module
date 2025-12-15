@@ -1,0 +1,23 @@
+{
+  "name": "concox-v5-logger",
+  "version": "1.0.0",
+  "description": "Standalone Concox V5 GPS device data logger",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "concox",
+    "gps",
+    "tracker",
+    "logger"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
+
