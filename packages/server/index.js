@@ -631,47 +631,56 @@ class ConcoxV5Server {
     const socket = clientData.socket;
     const commandBytes = Buffer.from(command, "ascii");
     const serverFlag = Buffer.from([0x00, 0x00, 0x00, 0x00]);
-    const language = Buffer.from([0x00, 0x02]);
+    const language = Buffer.from([0x00, 0x02]); // English
     const serialNumber = Math.floor(Math.random() * 65535);
 
+    // commandLength = ServerFlag(4) + Command(N) + Language(2)
     const commandLength = 4 + commandBytes.length + 2;
 
+    // packetLength = Protocol(1) + CommandLength(1) + CommandContent + Serial(2) + CRC(2)
+    const packetLength = 1 + 1 + commandLength + 2 + 2;
+
     let packet;
-    if (commandLength < 256) {
+    if (packetLength < 256) {
+      // Build the complete packet BEFORE calculating CRC
       const buffer = Buffer.from([
         0x78,
-        0x78,
-        commandLength + 5,
-        0x80,
-        commandLength,
+        0x78, // Start
+        packetLength, // Length byte
+        0x80, // Protocol: Online Command
+        commandLength, // Command length
       ]);
 
-      packet = Buffer.concat([
+      // Concatenate all data that goes BEFORE CRC
+      const dataBeforeCRC = Buffer.concat([
         buffer,
-        serverFlag,
-        commandBytes,
-        language,
-        Buffer.from([(serialNumber >> 8) & 0xff, serialNumber & 0xff]),
+        serverFlag, // 4 bytes
+        commandBytes, // N bytes
+        language, // 2 bytes
+        Buffer.from([(serialNumber >> 8) & 0xff, serialNumber & 0xff]), // 2 bytes
       ]);
 
-      const crc = calculateCRCITU(packet, 2, packet.length);
+      // Calculate CRC from Length byte to Serial Number (indices 2 to end)
+      const crc = calculateCRCITU(dataBeforeCRC, 2, dataBeforeCRC.length);
+
+      // Build final packet
       packet = Buffer.concat([
-        packet,
+        dataBeforeCRC,
         Buffer.from([(crc >> 8) & 0xff, crc & 0xff]),
         Buffer.from([0x0d, 0x0a]),
       ]);
     } else {
-      const totalLength = commandLength + 5;
+      // Long packet (0x79 0x79) - for commands > ~240 chars
       const buffer = Buffer.from([
         0x79,
-        0x79,
-        (totalLength >> 8) & 0xff,
-        totalLength & 0xff,
-        0x80,
-        commandLength,
+        0x79, // Start
+        (packetLength >> 8) & 0xff,
+        packetLength & 0xff, // Length (2 bytes)
+        0x80, // Protocol
+        commandLength, // Command length
       ]);
 
-      packet = Buffer.concat([
+      const dataBeforeCRC = Buffer.concat([
         buffer,
         serverFlag,
         commandBytes,
@@ -679,9 +688,11 @@ class ConcoxV5Server {
         Buffer.from([(serialNumber >> 8) & 0xff, serialNumber & 0xff]),
       ]);
 
-      const crc = calculateCRCITU(packet, 2, packet.length);
+      // For long packets, CRC starts at index 2 (after 0x79 0x79)
+      const crc = calculateCRCITU(dataBeforeCRC, 2, dataBeforeCRC.length);
+
       packet = Buffer.concat([
-        packet,
+        dataBeforeCRC,
         Buffer.from([(crc >> 8) & 0xff, crc & 0xff]),
         Buffer.from([0x0d, 0x0a]),
       ]);
@@ -689,16 +700,20 @@ class ConcoxV5Server {
 
     socket.write(packet);
     const commandSentTime = Date.now();
+
     log(`📤 Sent command to ${imei}`, {
       command: command,
       hex: packet.toString("hex").toUpperCase(),
       protocol: "0x80",
-      serialNumber: serialNumber,
+      serialNumber: `0x${serialNumber
+        .toString(16)
+        .padStart(4, "0")
+        .toUpperCase()}`,
+      packetLength: packet.length,
       note: "Waiting for device response (protocol 0x21 or 0x15)",
-      timestamp: new Date().toISOString(),
     });
 
-    // Store command info for tracking
+    // Store command info for tracking responses
     if (!socket.pendingCommands) {
       socket.pendingCommands = new Map();
     }
@@ -710,7 +725,12 @@ class ConcoxV5Server {
 
     // Clean up old pending commands after 60 seconds
     setTimeout(() => {
-      if (socket.pendingCommands) {
+      if (socket.pendingCommands && socket.pendingCommands.has(serialNumber)) {
+        log(`⏱️ Command timeout - no response received`, {
+          imei: imei,
+          command: command,
+          serialNumber: `0x${serialNumber.toString(16).padStart(4, "0")}`,
+        });
         socket.pendingCommands.delete(serialNumber);
       }
     }, 60000);
