@@ -394,21 +394,32 @@ class ConcoxV5Server {
   handleCommandResponse(socket, packet, clientInfo) {
     try {
       const data = parseCommandResponse(packet);
-      log(`📨 Command Response`, {
-        imei: socket.deviceImei || "unknown",
+      const imei = socket.deviceImei || "unknown";
+
+      log(`📨 Command Response (0x21)`, {
+        imei: imei,
         response: data.response,
         serverFlag: data.serverFlag,
+        serialNumber: data.serialNumber,
         rawResponse: data.response,
       });
 
       // Check if response indicates success or failure
-      if (data.response.includes("OK") || data.response.includes("SUCCESS")) {
+      const responseUpper = data.response.toUpperCase();
+      if (
+        responseUpper.includes("OK") ||
+        responseUpper.includes("SUCCESS") ||
+        responseUpper.includes("RELAY")
+      ) {
         log(`✅ Command executed successfully: ${data.response}`);
       } else if (
-        data.response.includes("ERROR") ||
-        data.response.includes("FAIL")
+        responseUpper.includes("ERROR") ||
+        responseUpper.includes("FAIL") ||
+        responseUpper.includes("INVALID")
       ) {
         log(`❌ Command failed: ${data.response}`);
+      } else {
+        log(`ℹ️ Command response received: ${data.response}`);
       }
     } catch (error) {
       log(`❌ Error parsing command response: ${error.message}`);
@@ -418,20 +429,31 @@ class ConcoxV5Server {
   handleCommandResponseJM01(socket, packet, clientInfo) {
     try {
       const data = parseCommandResponseJM01(packet);
-      log(`📨 Command Response (JM01)`, {
-        imei: socket.deviceImei || "unknown",
+      const imei = socket.deviceImei || "unknown";
+
+      log(`📨 Command Response (JM01 - 0x15)`, {
+        imei: imei,
         response: data.response,
+        serialNumber: data.serialNumber,
         rawResponse: data.response,
       });
 
       // Check if response indicates success or failure
-      if (data.response.includes("OK") || data.response.includes("SUCCESS")) {
+      const responseUpper = data.response.toUpperCase();
+      if (
+        responseUpper.includes("OK") ||
+        responseUpper.includes("SUCCESS") ||
+        responseUpper.includes("RELAY")
+      ) {
         log(`✅ Command executed successfully: ${data.response}`);
       } else if (
-        data.response.includes("ERROR") ||
-        data.response.includes("FAIL")
+        responseUpper.includes("ERROR") ||
+        responseUpper.includes("FAIL") ||
+        responseUpper.includes("INVALID")
       ) {
         log(`❌ Command failed: ${data.response}`);
+      } else {
+        log(`ℹ️ Command response received: ${data.response}`);
       }
     } catch (error) {
       log(`❌ Error parsing JM01 command response: ${error.message}`);
