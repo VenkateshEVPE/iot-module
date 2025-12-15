@@ -398,7 +398,18 @@ class ConcoxV5Server {
         imei: socket.deviceImei || "unknown",
         response: data.response,
         serverFlag: data.serverFlag,
+        rawResponse: data.response,
       });
+
+      // Check if response indicates success or failure
+      if (data.response.includes("OK") || data.response.includes("SUCCESS")) {
+        log(`✅ Command executed successfully: ${data.response}`);
+      } else if (
+        data.response.includes("ERROR") ||
+        data.response.includes("FAIL")
+      ) {
+        log(`❌ Command failed: ${data.response}`);
+      }
     } catch (error) {
       log(`❌ Error parsing command response: ${error.message}`);
     }
@@ -410,7 +421,18 @@ class ConcoxV5Server {
       log(`📨 Command Response (JM01)`, {
         imei: socket.deviceImei || "unknown",
         response: data.response,
+        rawResponse: data.response,
       });
+
+      // Check if response indicates success or failure
+      if (data.response.includes("OK") || data.response.includes("SUCCESS")) {
+        log(`✅ Command executed successfully: ${data.response}`);
+      } else if (
+        data.response.includes("ERROR") ||
+        data.response.includes("FAIL")
+      ) {
+        log(`❌ Command failed: ${data.response}`);
+      }
     } catch (error) {
       log(`❌ Error parsing JM01 command response: ${error.message}`);
     }
