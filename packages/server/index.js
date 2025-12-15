@@ -141,6 +141,16 @@ class ConcoxV5Server {
       packetInfo
     );
 
+    // Debug: Log all protocol numbers to catch any unhandled command responses
+    if (protocolNumber === 0x21 || protocolNumber === 0x15) {
+      log(
+        `🔍 DEBUG: Command response protocol detected: 0x${protocolNumber
+          .toString(16)
+          .padStart(2, "0")
+          .toUpperCase()}`
+      );
+    }
+
     try {
       switch (protocolNumber) {
         case PROTOCOL_NUMBERS.LOGIN:
@@ -395,14 +405,37 @@ class ConcoxV5Server {
     try {
       const data = parseCommandResponse(packet);
       const imei = socket.deviceImei || "unknown";
+      const responseTime = Date.now();
 
-      log(`📨 Command Response (0x21)`, {
-        imei: imei,
-        response: data.response,
-        serverFlag: data.serverFlag,
-        serialNumber: data.serialNumber,
-        rawResponse: data.response,
-      });
+      // Check if this matches a pending command
+      let matchedCommand = null;
+      if (socket.pendingCommands) {
+        matchedCommand = socket.pendingCommands.get(data.serialNumber);
+        if (matchedCommand) {
+          const responseDelay = responseTime - matchedCommand.sentAt;
+          socket.pendingCommands.delete(data.serialNumber);
+          log(`📨 Command Response (0x21) - Matched!`, {
+            imei: imei,
+            originalCommand: matchedCommand.command,
+            response: data.response,
+            serverFlag: data.serverFlag,
+            serialNumber: data.serialNumber,
+            responseDelayMs: responseDelay,
+            rawResponse: data.response,
+          });
+        }
+      }
+
+      if (!matchedCommand) {
+        log(`📨 Command Response (0x21)`, {
+          imei: imei,
+          response: data.response,
+          serverFlag: data.serverFlag,
+          serialNumber: data.serialNumber,
+          rawResponse: data.response,
+          note: "No matching pending command found",
+        });
+      }
 
       // Check if response indicates success or failure
       const responseUpper = data.response.toUpperCase();
@@ -422,7 +455,10 @@ class ConcoxV5Server {
         log(`ℹ️ Command response received: ${data.response}`);
       }
     } catch (error) {
-      log(`❌ Error parsing command response: ${error.message}`);
+      log(`❌ Error parsing command response: ${error.message}`, {
+        imei: socket.deviceImei || "unknown",
+        hex: packet.toString("hex").toUpperCase(),
+      });
     }
   }
 
@@ -430,13 +466,35 @@ class ConcoxV5Server {
     try {
       const data = parseCommandResponseJM01(packet);
       const imei = socket.deviceImei || "unknown";
+      const responseTime = Date.now();
 
-      log(`📨 Command Response (JM01 - 0x15)`, {
-        imei: imei,
-        response: data.response,
-        serialNumber: data.serialNumber,
-        rawResponse: data.response,
-      });
+      // Check if this matches a pending command
+      let matchedCommand = null;
+      if (socket.pendingCommands) {
+        matchedCommand = socket.pendingCommands.get(data.serialNumber);
+        if (matchedCommand) {
+          const responseDelay = responseTime - matchedCommand.sentAt;
+          socket.pendingCommands.delete(data.serialNumber);
+          log(`📨 Command Response (JM01 - 0x15) - Matched!`, {
+            imei: imei,
+            originalCommand: matchedCommand.command,
+            response: data.response,
+            serialNumber: data.serialNumber,
+            responseDelayMs: responseDelay,
+            rawResponse: data.response,
+          });
+        }
+      }
+
+      if (!matchedCommand) {
+        log(`📨 Command Response (JM01 - 0x15)`, {
+          imei: imei,
+          response: data.response,
+          serialNumber: data.serialNumber,
+          rawResponse: data.response,
+          note: "No matching pending command found",
+        });
+      }
 
       // Check if response indicates success or failure
       const responseUpper = data.response.toUpperCase();
@@ -456,7 +514,10 @@ class ConcoxV5Server {
         log(`ℹ️ Command response received: ${data.response}`);
       }
     } catch (error) {
-      log(`❌ Error parsing JM01 command response: ${error.message}`);
+      log(`❌ Error parsing JM01 command response: ${error.message}`, {
+        imei: socket.deviceImei || "unknown",
+        hex: packet.toString("hex").toUpperCase(),
+      });
     }
   }
 
@@ -627,12 +688,32 @@ class ConcoxV5Server {
     }
 
     socket.write(packet);
+    const commandSentTime = Date.now();
     log(`📤 Sent command to ${imei}`, {
       command: command,
       hex: packet.toString("hex").toUpperCase(),
       protocol: "0x80",
+      serialNumber: serialNumber,
       note: "Waiting for device response (protocol 0x21 or 0x15)",
+      timestamp: new Date().toISOString(),
     });
+
+    // Store command info for tracking
+    if (!socket.pendingCommands) {
+      socket.pendingCommands = new Map();
+    }
+    socket.pendingCommands.set(serialNumber, {
+      command: command,
+      sentAt: commandSentTime,
+      imei: imei,
+    });
+
+    // Clean up old pending commands after 60 seconds
+    setTimeout(() => {
+      if (socket.pendingCommands) {
+        socket.pendingCommands.delete(serialNumber);
+      }
+    }, 60000);
 
     return true;
   }

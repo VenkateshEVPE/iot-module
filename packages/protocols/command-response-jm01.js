@@ -4,7 +4,7 @@
  * Alternative response format for JM01 devices
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
+import { getHeaderSize, isLongPacket } from '@concox/shared/parser.js';
 
 /**
  * Parse Online Command Response JM01 packet
@@ -16,11 +16,24 @@ export function parseCommandResponseJM01(packet) {
   const dataStart = headerSize + 1;
   
   // JM01 Command Response structure:
-  // Start(2) + Length(1) + Protocol(1) + ResponseLength(1) + Response(N) + Serial(2) + CRC(2) + Stop(2)
+  // Start(2) + Length(1-2) + Protocol(1) + ResponseLength(1-2) + Response(N) + Serial(2) + CRC(2) + Stop(2)
   // Note: JM01 format doesn't include ServerFlag
+  // ResponseLength is 1 byte for short packets (78 78) and 2 bytes for long packets (79 79)
   
-  const responseLength = packet[dataStart];
-  const response = packet.slice(dataStart + 1, dataStart + 1 + responseLength).toString('ascii');
+  let responseLength;
+  let responseStart;
+  
+  if (isLongPacket(packet)) {
+    // Long packet (79 79): ResponseLength is 2 bytes
+    responseLength = packet.readUInt16BE(dataStart);
+    responseStart = dataStart + 2;
+  } else {
+    // Short packet (78 78): ResponseLength is 1 byte
+    responseLength = packet[dataStart];
+    responseStart = dataStart + 1;
+  }
+  
+  const response = packet.slice(responseStart, responseStart + responseLength).toString('ascii');
   
   const serialNumber = packet.readUInt16BE(packet.length - 6);
 
