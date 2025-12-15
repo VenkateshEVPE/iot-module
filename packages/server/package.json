@@ -1,0 +1,21 @@
+{
+  "name": "@concox/server",
+  "version": "1.0.0",
+  "description": "Concox V5 TCP Server",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./logger": "./logger.js"
+  },
+  "bin": {
+    "concox-server": "./start.js"
+  },
+  "dependencies": {
+    "@concox/shared": "*",
+    "@concox/protocols": "*",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
+

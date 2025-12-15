@@ -1,23 +1,28 @@
 {
   "name": "concox-v5-logger",
-  "version": "1.0.0",
-  "description": "Standalone Concox V5 GPS device data logger",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Complete Concox V5 GPS device data logger - Monorepo",
   "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "start": "node index.js",
-    "dev": "node --watch index.js"
+    "start": "node packages/server/start.js",
+    "dev": "node --watch packages/server/start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "concox",
     "gps",
     "tracker",
-    "logger"
+    "logger",
+    "monorepo"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "express": "^5.2.1"
   }
 }
-

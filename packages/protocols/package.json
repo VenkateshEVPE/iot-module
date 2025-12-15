@@ -1,0 +1,29 @@
+{
+  "name": "@concox/protocols",
+  "version": "1.0.0",
+  "description": "Concox V5 protocol handlers",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./login.js": "./login.js",
+    "./heartbeat.js": "./heartbeat.js",
+    "./gps.js": "./gps.js",
+    "./alarm.js": "./alarm.js",
+    "./lbs-alarm.js": "./lbs-alarm.js",
+    "./lbs-extension.js": "./lbs-extension.js",
+    "./wifi.js": "./wifi.js",
+    "./command-response.js": "./command-response.js",
+    "./command-response-jm01.js": "./command-response-jm01.js",
+    "./alarm-hvt001.js": "./alarm-hvt001.js",
+    "./external-device.js": "./external-device.js",
+    "./external-module.js": "./external-module.js",
+    "./file-transfer.js": "./file-transfer.js",
+    "./time-calibration.js": "./time-calibration.js",
+    "./information-transmission.js": "./information-transmission.js"
+  },
+  "dependencies": {
+    "@concox/shared": "*"
+  }
+}
+

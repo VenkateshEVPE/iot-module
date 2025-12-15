@@ -1,0 +1,15 @@
+{
+  "name": "@concox/shared",
+  "version": "1.0.0",
+  "description": "Shared utilities for Concox V5 protocol",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./crc.js": "./crc.js",
+    "./parser.js": "./parser.js",
+    "./imei.js": "./imei.js",
+    "./protocols.js": "./protocols.js"
+  }
+}
+
