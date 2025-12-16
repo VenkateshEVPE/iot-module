@@ -621,37 +621,82 @@ class ConcoxV5Server {
       const data = parseInformationTransmission(packet);
       const imei = socket.deviceImei || "unknown";
 
+      // Debug: Log full packet structure for sub-protocol 0x00
+      if (data.subProtocol === 0x00) {
+        const headerSize = packet[0] === 0x79 ? 4 : 3;
+        log(`🔍 DEBUG: 0x94 sub-protocol 0x00 packet structure`, {
+          imei,
+          packetLength: packet.length,
+          headerSize,
+          protocolPos: headerSize,
+          subProtocol: `0x${data.subProtocol.toString(16).padStart(2, "0")}`,
+          fullPacketHex: packet.toString("hex").toUpperCase(),
+          voltageBytesPos: `${headerSize + 2} to ${headerSize + 4}`,
+          voltageBytesHex: packet
+            .slice(headerSize + 2, headerSize + 4)
+            .toString("hex")
+            .toUpperCase(),
+        });
+      }
+
       // Sub-protocol 0x00 = External Power Voltage (Vehicle Battery)
       if (
         data.subProtocol === 0x00 &&
         data.data &&
         data.data.type === "voltage"
       ) {
-        const voltage = data.data.voltage;
+        const headerSize = packet[0] === 0x79 ? 4 : 3;
+        const protocolNumberPos = headerSize;
+        const voltageBytes = packet.slice(
+          protocolNumberPos + 2,
+          protocolNumberPos + 4
+        );
+        const rawVoltageValue = voltageBytes.readUInt16BE(0);
+        const voltage = rawVoltageValue / 100;
+
+        // Validate voltage range (vehicle battery should be 8-16V typically)
+        // If voltage is > 20V, it might be in wrong format or reading wrong bytes
+        let finalVoltage = voltage;
+        let voltageNote = "";
+
+        if (voltage > 20 || voltage < 5) {
+          // Try alternative parsing: maybe it's in millivolts?
+          const voltageMillivolts = rawVoltageValue / 1000;
+          if (voltageMillivolts >= 8 && voltageMillivolts <= 16) {
+            finalVoltage = voltageMillivolts;
+            voltageNote = "Parsed as millivolts (divided by 1000)";
+          } else {
+            voltageNote = `⚠️ WARNING: Voltage ${voltage.toFixed(
+              2
+            )}V seems incorrect. Raw bytes: ${voltageBytes
+              .toString("hex")
+              .toUpperCase()} (${rawVoltageValue} decimal). Vehicle battery should be 12-14V.`;
+          }
+        }
+
         const status =
-          voltage >= 12.0
+          finalVoltage >= 12.0
             ? "Good"
-            : voltage >= 11.5
+            : finalVoltage >= 11.5
             ? "Low"
-            : voltage >= 10.5
+            : finalVoltage >= 10.5
             ? "Critical"
             : "Very Low";
 
         // Store battery voltage in client data
         const clientData = this.clients.get(imei);
         if (clientData) {
-          clientData.lastBatteryVoltage = voltage;
+          clientData.lastBatteryVoltage = finalVoltage;
           clientData.lastBatteryVoltageAt = new Date().toISOString();
         }
 
         log(`🔋 Vehicle Battery Voltage`, {
           imei,
-          voltage: `${voltage.toFixed(2)}V`,
+          voltage: `${finalVoltage.toFixed(2)}V`,
+          rawValue: rawVoltageValue,
+          rawHex: voltageBytes.toString("hex").toUpperCase(),
           status,
-          rawHex: packet
-            .slice(packet[0] === 0x79 ? 6 : 5, packet[0] === 0x79 ? 8 : 7)
-            .toString("hex")
-            .toUpperCase(),
+          ...(voltageNote && { note: voltageNote }),
         });
 
         return;
