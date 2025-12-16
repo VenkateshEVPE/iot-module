@@ -10,14 +10,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const LOG_DIR = process.env.LOG_DIR || path.join(__dirname, "../../logs");
-const LOG_FILE = path.join(
-  LOG_DIR,
-  `concox-${new Date().toISOString().split("T")[0]}.log`
-);
 
 // Ensure log directory exists
 if (!fs.existsSync(LOG_DIR)) {
   fs.mkdirSync(LOG_DIR, { recursive: true });
+}
+
+/**
+ * Get the log file path for the current date
+ * Creates a new file name each day: concox-YYYY-MM-DD.log
+ */
+function getLogFile() {
+  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  return path.join(LOG_DIR, `concox-${today}.log`);
 }
 
 export function log(message, data = null) {
@@ -30,10 +35,11 @@ export function log(message, data = null) {
     console.log(JSON.stringify(data, null, 2));
   }
 
-  // File output
+  // File output - calculate log file dynamically for daily rotation
+  const logFile = getLogFile();
   const fileMessage = data
     ? `${logMessage}\n${JSON.stringify(data, null, 2)}\n`
     : `${logMessage}\n`;
 
-  fs.appendFileSync(LOG_FILE, fileMessage, "utf8");
+  fs.appendFileSync(logFile, fileMessage, "utf8");
 }
