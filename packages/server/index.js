@@ -452,7 +452,13 @@ class ConcoxV5Server {
         responseUpper.includes("FAIL") ||
         responseUpper.includes("INVALID")
       ) {
-        log(`❌ Command failed: ${data.response}`);
+        const errorNote = matchedCommand
+          ? `Command "${matchedCommand.command}" not recognized. Try using PARAM# for device parameters, or check device manual for supported commands.`
+          : "Device returned error response";
+        log(`❌ Command failed: ${data.response}`, {
+          imei: imei,
+          note: errorNote,
+        });
       } else {
         log(`ℹ️ Command response received: ${data.response}`);
       }
@@ -793,13 +799,15 @@ class ConcoxV5Server {
 
   /**
    * Request vehicle battery voltage from device
-   * Sends BATPARAM,0# command to request battery voltage
+   * Tries multiple command formats as different device models support different commands
    * @param {string} imei - Device IMEI
    * @returns {boolean} True if command sent successfully
    */
   requestBatteryVoltage(imei) {
     log(`📤 Requesting vehicle battery voltage from ${imei}`);
-    return this.sendCommand(imei, "BATPARAM,0#");
+    // Try PARAM# first (most common and widely supported)
+    // This requests all device parameters, which may include battery voltage
+    return this.sendCommand(imei, "PARAM#");
   }
 
   /**
@@ -815,6 +823,7 @@ class ConcoxV5Server {
 
   /**
    * Configure device to send battery voltage periodically
+   * Note: This command may not be supported by all device models
    * @param {string} imei - Device IMEI
    * @param {number} intervalMinutes - Reporting interval in minutes (default: 30)
    * @returns {boolean} True if command sent successfully
@@ -823,7 +832,24 @@ class ConcoxV5Server {
     log(
       `📤 Configuring battery reporting every ${intervalMinutes} minutes for ${imei}`
     );
+    // Note: This command may not be supported by all models
+    // If device returns "invalid command", this feature is not available
     return this.sendCommand(imei, `BATINTERVAL,${intervalMinutes}#`);
+  }
+
+  /**
+   * Try alternative battery voltage commands (for testing)
+   * Some device models may support different command formats
+   * @param {string} imei - Device IMEI
+   * @param {string} command - Command to try (e.g., "BATTERY#", "BAT#", "VOLTAGE#")
+   * @returns {boolean} True if command sent successfully
+   */
+  tryBatteryCommand(imei, command) {
+    log(`📤 Trying alternative battery command: ${command} for ${imei}`);
+    if (!command.endsWith("#")) {
+      command = command + "#";
+    }
+    return this.sendCommand(imei, command);
   }
 
   /**

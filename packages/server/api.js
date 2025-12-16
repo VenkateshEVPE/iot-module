@@ -328,7 +328,7 @@ export function setupAPI(server, port = 3000) {
           success: true,
           message: "Battery voltage request sent to device",
           imei,
-          note: "Check logs for battery voltage response (protocol 0x94, sub-protocol 0x00)",
+          note: "Using PARAM# command to request device parameters. Check logs for response (protocol 0x94, sub-protocol 0x00 for battery voltage). If device returns 'invalid command', battery voltage reporting may not be supported by this device model.",
         });
       } else {
         res.status(404).json({
