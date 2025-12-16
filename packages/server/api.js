@@ -44,13 +44,32 @@ export function setupAPI(server, port = 3000) {
   app.get("/api/devices", (req, res) => {
     try {
       const devices = Array.from(server.clients.entries()).map(
-        ([imei, client]) => ({
-          imei,
-          connectedAt: client.connectedAt,
-          address: client.clientInfo.address,
-          port: client.clientInfo.port,
-          connectionId: client.clientInfo.id,
-        })
+        ([imei, client]) => {
+          const device = {
+            imei,
+            connectedAt: client.connectedAt,
+            address: client.clientInfo.address,
+            port: client.clientInfo.port,
+            connectionId: client.clientInfo.id,
+          };
+          // Include battery voltage if available
+          if (client.lastBatteryVoltage !== null) {
+            device.batteryVoltage = {
+              voltage: client.lastBatteryVoltage,
+              voltageFormatted: `${client.lastBatteryVoltage.toFixed(2)}V`,
+              status:
+                client.lastBatteryVoltage >= 12.0
+                  ? "Good"
+                  : client.lastBatteryVoltage >= 11.5
+                  ? "Low"
+                  : client.lastBatteryVoltage >= 10.5
+                  ? "Critical"
+                  : "Very Low",
+              lastUpdated: client.lastBatteryVoltageAt,
+            };
+          }
+          return device;
+        }
       );
 
       res.json({
@@ -80,15 +99,33 @@ export function setupAPI(server, port = 3000) {
         });
       }
 
+      const device = {
+        imei,
+        connectedAt: client.connectedAt,
+        address: client.clientInfo.address,
+        port: client.clientInfo.port,
+        connectionId: client.clientInfo.id,
+      };
+      // Include battery voltage if available
+      if (client.lastBatteryVoltage !== null) {
+        device.batteryVoltage = {
+          voltage: client.lastBatteryVoltage,
+          voltageFormatted: `${client.lastBatteryVoltage.toFixed(2)}V`,
+          status:
+            client.lastBatteryVoltage >= 12.0
+              ? "Good"
+              : client.lastBatteryVoltage >= 11.5
+              ? "Low"
+              : client.lastBatteryVoltage >= 10.5
+              ? "Critical"
+              : "Very Low",
+          lastUpdated: client.lastBatteryVoltageAt,
+        };
+      }
+
       res.json({
         success: true,
-        device: {
-          imei,
-          connectedAt: client.connectedAt,
-          address: client.clientInfo.address,
-          port: client.clientInfo.port,
-          connectionId: client.clientInfo.id,
-        },
+        device,
       });
     } catch (error) {
       res.status(500).json({
@@ -235,6 +272,95 @@ export function setupAPI(server, port = 3000) {
           message: "Location request sent to device",
           imei,
           note: "Check logs for GPS location response",
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          error: "Device not connected",
+          imei,
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  // Get vehicle battery voltage
+  app.get("/api/devices/:imei/battery", (req, res) => {
+    try {
+      const { imei } = req.params;
+      const batteryData = server.getBatteryVoltage(imei);
+
+      if (batteryData === null) {
+        return res.status(404).json({
+          success: false,
+          error: "Battery voltage not available",
+          imei,
+          note: "Request battery voltage first using POST /api/devices/:imei/battery/request",
+        });
+      }
+
+      res.json({
+        success: true,
+        imei,
+        battery: batteryData,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  // Request vehicle battery voltage
+  app.post("/api/devices/:imei/battery/request", (req, res) => {
+    try {
+      const { imei } = req.params;
+      const success = server.requestBatteryVoltage(imei);
+
+      if (success) {
+        log(`🌐 API: Battery voltage request for ${imei}`);
+        res.json({
+          success: true,
+          message: "Battery voltage request sent to device",
+          imei,
+          note: "Check logs for battery voltage response (protocol 0x94, sub-protocol 0x00)",
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          error: "Device not connected",
+          imei,
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  // Configure battery reporting interval
+  app.post("/api/devices/:imei/battery/configure", (req, res) => {
+    try {
+      const { imei } = req.params;
+      const { intervalMinutes = 30 } = req.body;
+      const success = server.configureBatteryReporting(imei, intervalMinutes);
+
+      if (success) {
+        log(
+          `🌐 API: Battery reporting configuration for ${imei} (${intervalMinutes} minutes)`
+        );
+        res.json({
+          success: true,
+          message: `Battery reporting configured for ${intervalMinutes} minutes`,
+          imei,
+          intervalMinutes,
         });
       } else {
         res.status(404).json({

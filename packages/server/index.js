@@ -230,6 +230,8 @@ class ConcoxV5Server {
       socket: socket,
       clientInfo: clientInfo,
       connectedAt: new Date().toISOString(),
+      lastBatteryVoltage: null, // Vehicle battery voltage (from 0x94, sub-protocol 0x00)
+      lastBatteryVoltageAt: null,
     });
 
     const ack = createLoginAck(serialNumber);
@@ -611,8 +613,47 @@ class ConcoxV5Server {
   handleInformationTransmission(socket, packet, clientInfo) {
     try {
       const data = parseInformationTransmission(packet);
+      const imei = socket.deviceImei || "unknown";
+
+      // Sub-protocol 0x00 = External Power Voltage (Vehicle Battery)
+      if (
+        data.subProtocol === 0x00 &&
+        data.data &&
+        data.data.type === "voltage"
+      ) {
+        const voltage = data.data.voltage;
+        const status =
+          voltage >= 12.0
+            ? "Good"
+            : voltage >= 11.5
+            ? "Low"
+            : voltage >= 10.5
+            ? "Critical"
+            : "Very Low";
+
+        // Store battery voltage in client data
+        const clientData = this.clients.get(imei);
+        if (clientData) {
+          clientData.lastBatteryVoltage = voltage;
+          clientData.lastBatteryVoltageAt = new Date().toISOString();
+        }
+
+        log(`🔋 Vehicle Battery Voltage`, {
+          imei,
+          voltage: `${voltage.toFixed(2)}V`,
+          status,
+          rawHex: packet
+            .slice(packet[0] === 0x79 ? 6 : 5, packet[0] === 0x79 ? 8 : 7)
+            .toString("hex")
+            .toUpperCase(),
+        });
+
+        return;
+      }
+
+      // Handle other sub-protocols
       log(`📊 Information Transmission`, {
-        imei: socket.deviceImei || "unknown",
+        imei,
         subProtocol: `0x${data.subProtocol.toString(16).padStart(2, "0")}`,
         ...data.data,
       });
@@ -748,6 +789,66 @@ class ConcoxV5Server {
 
   requestDeviceStatus(imei) {
     return this.sendCommand(imei, "STATUS#");
+  }
+
+  /**
+   * Request vehicle battery voltage from device
+   * Sends BATPARAM,0# command to request battery voltage
+   * @param {string} imei - Device IMEI
+   * @returns {boolean} True if command sent successfully
+   */
+  requestBatteryVoltage(imei) {
+    log(`📤 Requesting vehicle battery voltage from ${imei}`);
+    return this.sendCommand(imei, "BATPARAM,0#");
+  }
+
+  /**
+   * Request all device parameters (includes battery voltage)
+   * Sends PARAM# command to request all device parameters
+   * @param {string} imei - Device IMEI
+   * @returns {boolean} True if command sent successfully
+   */
+  requestDeviceParameters(imei) {
+    log(`📤 Requesting all device parameters from ${imei}`);
+    return this.sendCommand(imei, "PARAM#");
+  }
+
+  /**
+   * Configure device to send battery voltage periodically
+   * @param {string} imei - Device IMEI
+   * @param {number} intervalMinutes - Reporting interval in minutes (default: 30)
+   * @returns {boolean} True if command sent successfully
+   */
+  configureBatteryReporting(imei, intervalMinutes = 30) {
+    log(
+      `📤 Configuring battery reporting every ${intervalMinutes} minutes for ${imei}`
+    );
+    return this.sendCommand(imei, `BATINTERVAL,${intervalMinutes}#`);
+  }
+
+  /**
+   * Get last known vehicle battery voltage for a device
+   * @param {string} imei - Device IMEI
+   * @returns {Object|null} Battery voltage data or null if not available
+   */
+  getBatteryVoltage(imei) {
+    const clientData = this.clients.get(imei);
+    if (!clientData || clientData.lastBatteryVoltage === null) {
+      return null;
+    }
+    return {
+      voltage: clientData.lastBatteryVoltage,
+      voltageFormatted: `${clientData.lastBatteryVoltage.toFixed(2)}V`,
+      status:
+        clientData.lastBatteryVoltage >= 12.0
+          ? "Good"
+          : clientData.lastBatteryVoltage >= 11.5
+          ? "Low"
+          : clientData.lastBatteryVoltage >= 10.5
+          ? "Critical"
+          : "Very Low",
+      lastUpdated: clientData.lastBatteryVoltageAt,
+    };
   }
 
   stop() {
