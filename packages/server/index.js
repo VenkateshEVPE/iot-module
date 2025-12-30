@@ -232,6 +232,8 @@ class ConcoxV5Server {
       connectedAt: new Date().toISOString(),
       lastBatteryVoltage: null, // Vehicle battery voltage (from 0x94, sub-protocol 0x00)
       lastBatteryVoltageAt: null,
+      lastMileage: null, // Odometer reading in meters (from 0x22 GPS Location)
+      lastMileageAt: null,
     });
 
     const ack = createLoginAck(serialNumber);
@@ -317,6 +319,14 @@ class ConcoxV5Server {
       if (data.mileage !== null) {
         locationData.mileage_meters = data.mileage;
         locationData.mileage_km = (data.mileage / 1000).toFixed(2);
+        locationData.mileage_miles = (data.mileage / 1609.34).toFixed(2);
+
+        // Store mileage in client data
+        const clientData = this.clients.get(socket.deviceImei);
+        if (clientData) {
+          clientData.lastMileage = data.mileage;
+          clientData.lastMileageAt = new Date().toISOString();
+        }
       }
       if (data.acc !== null) {
         locationData.acc = data.acc === 0x01 ? "High (On)" : "Low (Off)";
@@ -874,6 +884,24 @@ class ConcoxV5Server {
           ? "Critical"
           : "Very Low",
       lastUpdated: clientData.lastBatteryVoltageAt,
+    };
+  }
+
+  /**
+   * Get last known odometer reading for a device
+   * @param {string} imei - Device IMEI
+   * @returns {Object|null} Odometer data or null if not available
+   */
+  getOdometer(imei) {
+    const clientData = this.clients.get(imei);
+    if (!clientData || clientData.lastMileage === null) {
+      return null;
+    }
+    return {
+      mileage_meters: clientData.lastMileage,
+      mileage_km: (clientData.lastMileage / 1000).toFixed(2),
+      mileage_miles: (clientData.lastMileage / 1609.34).toFixed(2),
+      lastUpdated: clientData.lastMileageAt,
     };
   }
 

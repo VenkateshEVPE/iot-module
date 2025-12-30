@@ -57,7 +57,19 @@ GET /api/devices
       "connectedAt": "2024-12-15T10:31:20.500Z",
       "address": "192.168.1.100",
       "port": 54321,
-      "connectionId": "192.168.1.100:54321"
+      "connectionId": "192.168.1.100:54321",
+      "batteryVoltage": {
+        "voltage": 12.5,
+        "voltageFormatted": "12.50V",
+        "status": "Good",
+        "lastUpdated": "2024-12-15T10:35:00.000Z"
+      },
+      "odometer": {
+        "mileage_meters": 12345,
+        "mileage_km": "12.35",
+        "mileage_miles": "7.67",
+        "lastUpdated": "2024-12-15T10:35:00.000Z"
+      }
     },
     {
       "imei": "987654321098765",
@@ -69,6 +81,8 @@ GET /api/devices
   ]
 }
 ```
+
+**Note:** `batteryVoltage` and `odometer` fields are only included if data is available.
 
 **cURL Example:**
 
@@ -100,10 +114,24 @@ GET /api/devices/:imei
     "connectedAt": "2024-12-15T10:31:20.500Z",
     "address": "192.168.1.100",
     "port": 54321,
-    "connectionId": "192.168.1.100:54321"
+    "connectionId": "192.168.1.100:54321",
+    "batteryVoltage": {
+      "voltage": 12.5,
+      "voltageFormatted": "12.50V",
+      "status": "Good",
+      "lastUpdated": "2024-12-15T10:35:00.000Z"
+    },
+    "odometer": {
+      "mileage_meters": 12345,
+      "mileage_km": "12.35",
+      "mileage_miles": "7.67",
+      "lastUpdated": "2024-12-15T10:35:00.000Z"
+    }
   }
 }
 ```
+
+**Note:** `batteryVoltage` and `odometer` fields are only included if data is available.
 
 **Response (Not Found):**
 
@@ -343,6 +371,196 @@ curl -X POST http://localhost:3000/api/devices/123456789012345/command \
 - `RELAY,1#` - Immobilize (cut fuel/electricity)
 - `RESET#` - Reset device
 - `PARAM#` - Get all parameters
+
+---
+
+### Get Vehicle Battery Voltage
+
+Get the last known vehicle battery voltage reading for a device.
+
+```http
+GET /api/devices/:imei/battery
+```
+
+**Parameters:**
+
+- `imei` (path) - Device IMEI (15 digits)
+
+**Response (Success):**
+
+```json
+{
+  "success": true,
+  "imei": "123456789012345",
+  "battery": {
+    "voltage": 12.5,
+    "voltageFormatted": "12.50V",
+    "status": "Good",
+    "lastUpdated": "2024-12-15T10:35:00.000Z"
+  }
+}
+```
+
+**Response (Not Available):**
+
+```json
+{
+  "success": false,
+  "error": "Battery voltage not available",
+  "imei": "123456789012345",
+  "note": "Request battery voltage first using POST /api/devices/:imei/battery/request"
+}
+```
+
+**cURL Example:**
+
+```bash
+curl http://localhost:3000/api/devices/123456789012345/battery
+```
+
+**Note:** Battery voltage is received via protocol 0x94, sub-protocol 0x00. Use the request endpoint to ask the device to send battery data.
+
+---
+
+### Request Vehicle Battery Voltage
+
+Request the device to send its vehicle battery voltage reading.
+
+```http
+POST /api/devices/:imei/battery/request
+```
+
+**Parameters:**
+
+- `imei` (path) - Device IMEI (15 digits)
+
+**Response (Success):**
+
+```json
+{
+  "success": true,
+  "message": "Battery voltage request sent to device",
+  "imei": "123456789012345",
+  "note": "Using PARAM# command to request device parameters. Check logs for response (protocol 0x94, sub-protocol 0x00 for battery voltage). If device returns 'invalid command', battery voltage reporting may not be supported by this device model."
+}
+```
+
+**cURL Example:**
+
+```bash
+curl -X POST http://localhost:3000/api/devices/123456789012345/battery/request
+```
+
+---
+
+### Configure Battery Reporting Interval
+
+Configure the device to send battery voltage data periodically.
+
+```http
+POST /api/devices/:imei/battery/configure
+Content-Type: application/json
+
+{
+  "intervalMinutes": 30
+}
+```
+
+**Parameters:**
+
+- `imei` (path) - Device IMEI (15 digits)
+- `intervalMinutes` (body, optional) - Reporting interval in minutes (default: 30)
+
+**Request Body:**
+
+```json
+{
+  "intervalMinutes": 30
+}
+```
+
+**Response (Success):**
+
+```json
+{
+  "success": true,
+  "message": "Battery reporting configured for 30 minutes",
+  "imei": "123456789012345",
+  "intervalMinutes": 30
+}
+```
+
+**Response (Error):**
+
+```json
+{
+  "success": false,
+  "error": "Device not connected",
+  "imei": "123456789012345"
+}
+```
+
+**cURL Example:**
+
+```bash
+curl -X POST http://localhost:3000/api/devices/123456789012345/battery/configure \
+  -H "Content-Type: application/json" \
+  -d '{"intervalMinutes": 30}'
+```
+
+**Note:** This command may not be supported by all device models. If the device returns "invalid command", this feature is not available.
+
+---
+
+### Get Odometer Reading
+
+Get the last known odometer reading (total distance traveled) for a device.
+
+```http
+GET /api/devices/:imei/odometer
+```
+
+**Parameters:**
+
+- `imei` (path) - Device IMEI (15 digits)
+
+**Response (Success):**
+
+```json
+{
+  "success": true,
+  "imei": "123456789012345",
+  "odometer": {
+    "mileage_meters": 12345,
+    "mileage_km": "12.35",
+    "mileage_miles": "7.67",
+    "lastUpdated": "2024-12-15T10:35:00.000Z"
+  }
+}
+```
+
+**Response (Not Available):**
+
+```json
+{
+  "success": false,
+  "error": "Odometer reading not available",
+  "imei": "123456789012345",
+  "note": "Odometer data is sent with GPS Location packets (protocol 0x22). Wait for device to send location update."
+}
+```
+
+**cURL Example:**
+
+```bash
+curl http://localhost:3000/api/devices/123456789012345/odometer
+```
+
+**Note:**
+
+- Odometer reading is cumulative total distance (device-specific, not vehicle's previous mileage)
+- Data is automatically updated when device sends GPS Location packets
+- Values are provided in meters, kilometers, and miles
 
 ---
 

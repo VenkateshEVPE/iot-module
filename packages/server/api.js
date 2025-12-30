@@ -68,6 +68,15 @@ export function setupAPI(server, port = 3000) {
               lastUpdated: client.lastBatteryVoltageAt,
             };
           }
+          // Include odometer reading if available
+          if (client.lastMileage !== null) {
+            device.odometer = {
+              mileage_meters: client.lastMileage,
+              mileage_km: (client.lastMileage / 1000).toFixed(2),
+              mileage_miles: (client.lastMileage / 1609.34).toFixed(2),
+              lastUpdated: client.lastMileageAt,
+            };
+          }
           return device;
         }
       );
@@ -120,6 +129,15 @@ export function setupAPI(server, port = 3000) {
               ? "Critical"
               : "Very Low",
           lastUpdated: client.lastBatteryVoltageAt,
+        };
+      }
+      // Include odometer reading if available
+      if (client.lastMileage !== null) {
+        device.odometer = {
+          mileage_meters: client.lastMileage,
+          mileage_km: (client.lastMileage / 1000).toFixed(2),
+          mileage_miles: (client.lastMileage / 1609.34).toFixed(2),
+          lastUpdated: client.lastMileageAt,
         };
       }
 
@@ -369,6 +387,34 @@ export function setupAPI(server, port = 3000) {
           imei,
         });
       }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  });
+
+  // Get odometer reading
+  app.get("/api/devices/:imei/odometer", (req, res) => {
+    try {
+      const { imei } = req.params;
+      const odometerData = server.getOdometer(imei);
+
+      if (odometerData === null) {
+        return res.status(404).json({
+          success: false,
+          error: "Odometer reading not available",
+          imei,
+          note: "Odometer data is sent with GPS Location packets (protocol 0x22). Wait for device to send location update.",
+        });
+      }
+
+      res.json({
+        success: true,
+        imei,
+        odometer: odometerData,
+      });
     } catch (error) {
       res.status(500).json({
         success: false,
