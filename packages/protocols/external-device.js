@@ -4,8 +4,8 @@
  * For X3 devices with external sensors/modules
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { getHeaderSize } from '../shared/parser.js';
+import { calculateCRCITU } from '../shared/crc.js';
 
 /**
  * Parse External Device Transfer packet

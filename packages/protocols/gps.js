@@ -2,7 +2,7 @@
  * GPS Location Protocol Handler (0x22)
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
+import { getHeaderSize } from '../shared/parser.js';
 
 export function parseGPSLocation(packet) {
   const headerSize = getHeaderSize(packet);

@@ -5,46 +5,46 @@
 
 import net from "net";
 import dotenv from "dotenv";
-import { parsePacket, getProtocolName, PROTOCOL_NUMBERS } from "@concox/shared";
+import { parsePacket, getProtocolName, PROTOCOL_NUMBERS } from "../shared/index.js";
 
 // Protocol handlers
-import { parseLogin, createLoginAck } from "@concox/protocols/login.js";
+import { parseLogin, createLoginAck } from "../protocols/login.js";
 import {
   parseHeartbeat,
   createHeartbeatAck,
-} from "@concox/protocols/heartbeat.js";
-import { parseGPSLocation } from "@concox/protocols/gps.js";
-import { parseAlarm, createAlarmAck } from "@concox/protocols/alarm.js";
+} from "../protocols/heartbeat.js";
+import { parseGPSLocation } from "../protocols/gps.js";
+import { parseAlarm, createAlarmAck } from "../protocols/alarm.js";
 import {
   parseLBSAlarm,
   createLBSAlarmAck,
-} from "@concox/protocols/lbs-alarm.js";
-import { parseLBSExtension } from "@concox/protocols/lbs-extension.js";
-import { parseWiFi, createWiFiResponse } from "@concox/protocols/wifi.js";
-import { parseCommandResponse } from "@concox/protocols/command-response.js";
-import { parseCommandResponseJM01 } from "@concox/protocols/command-response-jm01.js";
+} from "../protocols/lbs-alarm.js";
+import { parseLBSExtension } from "../protocols/lbs-extension.js";
+import { parseWiFi, createWiFiResponse } from "../protocols/wifi.js";
+import { parseCommandResponse } from "../protocols/command-response.js";
+import { parseCommandResponseJM01 } from "../protocols/command-response-jm01.js";
 import {
   parseAlarmHVT001,
   createAlarmHVT001Ack,
-} from "@concox/protocols/alarm-hvt001.js";
+} from "../protocols/alarm-hvt001.js";
 import {
   parseExternalDeviceTransfer,
   createExternalDeviceResponse,
-} from "@concox/protocols/external-device.js";
+} from "../protocols/external-device.js";
 import {
   parseExternalModuleTransmission,
   createExternalModuleResponse,
-} from "@concox/protocols/external-module.js";
+} from "../protocols/external-module.js";
 import {
   parseFileTransfer,
   createFileTransferAck,
-} from "@concox/protocols/file-transfer.js";
+} from "../protocols/file-transfer.js";
 import {
   parseTimeCalibration,
   createTimeCalibrationResponse,
-} from "@concox/protocols/time-calibration.js";
-import { parseInformationTransmission } from "@concox/protocols/information-transmission.js";
-import { calculateCRCITU } from "@concox/shared";
+} from "../protocols/time-calibration.js";
+import { parseInformationTransmission } from "../protocols/information-transmission.js";
+import { calculateCRCITU } from "../shared/index.js";
 import { log } from "./logger.js";
 
 dotenv.config();

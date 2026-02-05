@@ -3,7 +3,7 @@
  * Based on Concox V5 Protocol Manual - Section 8
  */
 
-import { getHeaderSize, isLongPacket } from "@concox/shared/parser.js";
+import { getHeaderSize, isLongPacket } from "../shared/parser.js";
 
 /**
  * Parse Online Command Response packet

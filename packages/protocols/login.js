@@ -2,9 +2,9 @@
  * Login Protocol Handler (0x01)
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
-import { extractIMEI } from '@concox/shared/imei.js';
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { getHeaderSize } from '../shared/parser.js';
+import { extractIMEI } from '../shared/imei.js';
+import { calculateCRCITU } from '../shared/crc.js';
 
 export function parseLogin(packet) {
   const headerSize = getHeaderSize(packet);

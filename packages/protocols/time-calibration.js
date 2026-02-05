@@ -2,7 +2,7 @@
  * Time Calibration Protocol Handler (0x8A)
  */
 
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { calculateCRCITU } from '../shared/crc.js';
 
 export function parseTimeCalibration(packet) {
   const serialNumber = packet.readUInt16BE(packet.length - 6);

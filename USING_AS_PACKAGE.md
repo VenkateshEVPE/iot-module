@@ -2,39 +2,40 @@
 
 Complete guide on how to use Concox V5 Logger packages in your own application.
 
-## 🚀 Quick Start (Local Path - Recommended for Development)
+## 🚀 Quick Start
 
-### Step 1: Install in Your App
+### Option A: From GitHub (single package)
 
-In your other application's `package.json`:
+In your app's `package.json`:
 
 ```json
 {
   "name": "my-iot-app",
   "type": "module",
   "dependencies": {
-    "@concox/server": "file:../concox-logger/packages/server",
-    "@concox/protocols": "file:../concox-logger/packages/protocols",
-    "@concox/shared": "file:../concox-logger/packages/shared"
+    "@concox/logger": "git+https://github.com/VenkateshEVPE/iot-module.git#main"
   }
 }
 ```
 
-### Step 2: Install
-
-```bash
-cd my-app
-npm install
-```
-
-### Step 3: Use It
+Then `npm install` and use:
 
 ```javascript
-import ConcoxV5Server from "@concox/server";
+import ConcoxV5Server from "@concox/logger";
 
 const server = new ConcoxV5Server();
 await server.start();
 ```
+
+### Option B: Local path (development)
+
+```json
+"dependencies": {
+  "@concox/logger": "file:../concox-logger"
+}
+```
+
+Use the same imports as above (`@concox/logger`, `@concox/logger/shared`, `@concox/logger/protocols/...`).
 
 ## 📦 Installation Options
 
@@ -43,7 +44,7 @@ await server.start();
 ```json
 {
   "dependencies": {
-    "@concox/server": "file:../concox-logger/packages/server"
+    "@concox/logger": "file:../concox-logger"
   }
 }
 ```
@@ -61,22 +62,45 @@ After publishing:
 npm install @yourusername/concox-server
 ```
 
-### Option 3: Git Repository
+### Option 3: Git Repository (GitHub only – single package)
+
+The repo is structured so the **root** is one installable package. No subpath is needed, so npm works reliably from GitHub.
+
+**One dependency** – use `main` or `code-only` (or any branch):
 
 ```json
 {
   "dependencies": {
-    "@concox/server": "git+https://github.com/yourusername/concox-logger.git#main:packages/server"
+    "@concox/logger": "git+https://github.com/VenkateshEVPE/iot-module.git#main"
   }
 }
 ```
+
+- **Main branch:** `git+https://github.com/VenkateshEVPE/iot-module.git#main`
+- **code-only branch:** `git+https://github.com/VenkateshEVPE/iot-module.git#code-only`
+
+Then use it as:
+
+- `import ConcoxV5Server from "@concox/logger"` (or `"@concox/logger/server"`)
+- `import { parsePacket } from "@concox/logger/shared"`
+- `import { parseGPSLocation } from "@concox/logger/protocols/gps.js"`
+
+### Using in evpe-node (this repo)
+
+**evpe-node** uses the local repo root as one package:
+
+```json
+"@concox/logger": "file:.."
+```
+
+Run `npm install` from `evpe-node/`. For GitHub-only in another project, use the Git URL above instead of `file:..`.
 
 ## 💻 Usage Examples
 
 ### Example 1: Basic Server Usage
 
 ```javascript
-import ConcoxV5Server from "@concox/server";
+import ConcoxV5Server from "@concox/logger";
 
 const server = new ConcoxV5Server();
 await server.start();
@@ -90,7 +114,7 @@ server.mobilizeVehicle("123456789012345");
 
 ```javascript
 import express from "express";
-import ConcoxV5Server from "@concox/server";
+import ConcoxV5Server from "@concox/logger";
 
 const app = express();
 app.use(express.json());
@@ -125,10 +149,10 @@ app.listen(3000);
 If you only need protocol parsing (not the full server):
 
 ```javascript
-import { parsePacket } from "@concox/shared";
-import { parseLogin } from "@concox/protocols/login.js";
-import { parseGPSLocation } from "@concox/protocols/gps.js";
-import { parseAlarm } from "@concox/protocols/alarm.js";
+import { parsePacket } from "@concox/logger/shared";
+import { parseLogin } from "@concox/logger/protocols/login.js";
+import { parseGPSLocation } from "@concox/logger/protocols/gps.js";
+import { parseAlarm } from "@concox/logger/protocols/alarm.js";
 
 // Your custom packet processing
 function processPacket(buffer) {
@@ -160,8 +184,8 @@ console.log(data);
 ### Example 4: Custom Server with Extended Logic
 
 ```javascript
-import ConcoxV5Server from "@concox/server";
-import { parseGPSLocation } from "@concox/protocols/gps.js";
+import ConcoxV5Server from "@concox/logger";
+import { parseGPSLocation } from "@concox/logger/protocols/gps.js";
 
 class MyCustomServer extends ConcoxV5Server {
   handleGPSLocation(socket, packet, clientInfo) {
@@ -212,7 +236,7 @@ import {
   calculateCRCITU,
   getProtocolName,
   PROTOCOL_NUMBERS,
-} from "@concox/shared";
+} from "@concox/logger/shared";
 
 // Parse any packet
 const result = parsePacket(buffer);
@@ -232,7 +256,9 @@ if (result.protocolNumber === PROTOCOL_NUMBERS.GPS_LOCATION) {
 
 ## 📋 Package API Reference
 
-### @concox/shared
+With the single package `@concox/logger`, use subpaths: `@concox/logger`, `@concox/logger/shared`, `@concox/logger/protocols`, `@concox/logger/protocols/gps.js`, etc.
+
+### @concox/logger/shared
 
 **Functions:**
 - `parsePacket(buffer)` - Parse Concox packets
@@ -244,7 +270,7 @@ if (result.protocolNumber === PROTOCOL_NUMBERS.GPS_LOCATION) {
 - `PROTOCOL_NUMBERS` - Protocol number constants
 - `PROTOCOL_NAMES` - Protocol name mapping
 
-### @concox/protocols
+### @concox/logger/protocols
 
 Each protocol handler exports:
 
@@ -278,7 +304,7 @@ Each protocol handler exports:
 - `time-calibration.js` - Time Calibration (0x8A)
 - `information-transmission.js` - Info Transmission (0x94)
 
-### @concox/server
+### @concox/logger (server)
 
 **Class: ConcoxV5Server**
 
@@ -337,14 +363,14 @@ All packages have proper `exports` in their `package.json`:
   "name": "my-iot-app",
   "type": "module",
   "dependencies": {
-    "@concox/server": "file:../concox-logger/packages/server",
+    "@concox/logger": "git+https://github.com/VenkateshEVPE/iot-module.git#main",
     "express": "^4.18.0"
   }
 }
 
 // index.js
 import express from "express";
-import ConcoxV5Server from "@concox/server";
+import ConcoxV5Server from "@concox/logger";
 
 const app = express();
 const concoxServer = new ConcoxV5Server();

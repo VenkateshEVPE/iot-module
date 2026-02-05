@@ -2,7 +2,7 @@
  * Information Transmission Protocol Handler (0x94)
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
+import { getHeaderSize } from '../shared/parser.js';
 
 export function parseInformationTransmission(packet) {
   const headerSize = getHeaderSize(packet);
