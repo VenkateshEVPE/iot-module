@@ -3,38 +3,30 @@
  * Based on Concox V5 Protocol Manual
  */
 
-import { isLongPacket, getHeaderSize } from '@concox/shared/parser.js';
+import { getHeaderSize } from '@concox/shared/parser.js';
 import { calculateCRCITU } from '@concox/shared/crc.js';
 
 /**
  * Parse LBS Alarm packet
+ * Per V5 Protocol PDF section 7.1 (page 21): No Date/Time. Content = MCC, MNC, LAC, Cell ID, Terminal Info, Voltage, GSM, Alarm/Language.
  * @param {Buffer} packet - Packet buffer
  * @returns {Object} Parsed LBS alarm data
  */
 export function parseLBSAlarm(packet) {
   const headerSize = getHeaderSize(packet);
   const dataStart = headerSize + 1;
-  
-  // LBS Alarm structure (similar to GPS alarm but with LBS location)
-  // Start(2) + Length(1) + Protocol(1) + DateTime(6) + LBSData + AlarmType(1) + Serial(2) + CRC(2) + Stop(2)
-  
-  const datetime = {
-    year: 2000 + packet[dataStart],
-    month: packet[dataStart + 1],
-    day: packet[dataStart + 2],
-    hour: packet[dataStart + 3],
-    minute: packet[dataStart + 4],
-    second: packet[dataStart + 5],
-  };
 
-  // LBS data (MCC, MNC, LAC, Cell ID)
-  const mcc = packet.readUInt16BE(dataStart + 6);
-  const mnc = packet[dataStart + 8];
-  const lac = packet.readUInt16BE(dataStart + 9);
-  const cellId = packet.readUIntBE(dataStart + 11, 3);
-
-  // Alarm type (before serial number)
-  const alarmByte = packet[packet.length - 8];
+  // LBS Alarm structure (PDF page 21):
+  // Start(2) + Length(1) + Protocol(1) + MCC(2) + MNC(1) + LAC(2) + CellID(3) + TerminalInfo(1) + Voltage(1) + GSM(1) + Alarm/Language(2) + Serial(2) + CRC(2) + Stop(2)
+  const mcc = packet.readUInt16BE(dataStart);
+  const mnc = packet[dataStart + 2];
+  const lac = packet.readUInt16BE(dataStart + 3);
+  const cellId = packet.readUIntBE(dataStart + 5, 3);
+  const terminalInfo = packet[dataStart + 8];
+  const voltageLevel = packet[dataStart + 9];
+  const gsmSignal = packet[dataStart + 10];
+  const alarmByte = packet[dataStart + 11];
+  const languageByte = packet[dataStart + 12];
   const serialNumber = packet.readUInt16BE(packet.length - 6);
 
   const alarmTypes = {
@@ -45,34 +37,41 @@ export function parseLBSAlarm(packet) {
     0x04: "Enter Fence Alarm",
     0x05: "Exit Fence Alarm",
     0x06: "Over Speed Alarm",
-    0x09: "Moving Alarm",
-    0x0A: "Enter GPS Dead Zone",
-    0x0B: "Exit GPS Dead Zone",
-    0x0C: "Power On Alarm",
-    0x0D: "GPS First Fix",
-    0x0E: "External Low Battery",
-    0x0F: "External Low Battery Protection",
-    0x10: "SIM Change Notice",
-    0x11: "Power Off Alarm",
-    0x13: "Disassemble Alarm",
-    0x14: "Door Alarm",
-    0x19: "Internal Low Battery Alarm",
-    0x20: "Sleep Mode Alarm",
-    0x23: "Fall Alarm",
-    0xFE: "ACC On Alarm",
-    0xFF: "ACC Off Alarm",
+    0x09: "Vibration alarm",
+    0x0A: "Enter GPS dead zone alarm",
+    0x0B: "Exit GPS dead zone alarm",
+    0x0C: "Power on alarm",
+    0x0D: "GPS First fix notice",
+    0x0E: "External Low battery alarm",
+    0x0F: "Low battery protection alarm",
+    0x10: "SIM change notice",
+    0x11: "Power off alarm",
+    0x12: "Airplane mode alarm",
+    0x13: "Disassemble alarm",
+    0x14: "Door alarm",
+    0x19: "Internal low Battery Alarm",
+    0x20: "Sleep mode alarm",
+    0x23: "Fall alarm",
+    0xFE: "ACC On alarm",
+    0xFF: "ACC Off alarm",
   };
 
+  const languageMap = { 0x00: "no_reply", 0x01: "Chinese", 0x02: "English" };
+
   return {
-    datetime: `${datetime.year}-${String(datetime.month).padStart(2, "0")}-${String(datetime.day).padStart(2, "0")} ${String(datetime.hour).padStart(2, "0")}:${String(datetime.minute).padStart(2, "0")}:${String(datetime.second).padStart(2, "0")}`,
     lbs: {
       mcc,
       mnc,
       lac,
-      cellId: cellId.toString(16).toUpperCase().padStart(6, '0'),
+      cellId: cellId.toString(16).toUpperCase().padStart(6, "0"),
     },
+    terminalInfo,
+    voltageLevel,
+    gsmSignal,
     alarmType: alarmTypes[alarmByte] || `Unknown (0x${alarmByte.toString(16)})`,
     alarmByte,
+    language: languageMap[languageByte] ?? `Unknown (0x${languageByte.toString(16)})`,
+    languageByte,
     serialNumber,
   };
 }
