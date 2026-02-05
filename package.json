@@ -1,29 +1,30 @@
 {
-  "name": "concox-v5-logger",
+  "name": "@concox/logger",
   "version": "2.0.0",
-  "description": "Complete Concox V5 GPS device data logger - Monorepo",
+  "description": "Concox V5 GPS device data logger - Server, protocols, shared",
   "type": "module",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "main": "packages/server/index.js",
+  "exports": {
+    ".": "./packages/server/index.js",
+    "./server": "./packages/server/index.js",
+    "./logger": "./packages/server/logger.js",
+    "./protocols": "./packages/protocols/index.js",
+    "./protocols/*": "./packages/protocols/*.js",
+    "./shared": "./packages/shared/index.js",
+    "./shared/*": "./packages/shared/*.js"
+  },
+  "workspaces": ["packages/*"],
   "scripts": {
     "start": "node packages/server/start.js",
     "dev": "node --watch packages/server/start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "concox",
-    "gps",
-    "tracker",
-    "logger",
-    "monorepo"
-  ],
+  "keywords": ["concox", "gps", "tracker", "logger", "iot"],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.3.1",
-    "express": "^5.2.1"
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "xlsx": "^0.18.5"

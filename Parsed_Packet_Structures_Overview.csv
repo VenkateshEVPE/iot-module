@@ -1,0 +1,16 @@
+Protocol Number,Protocol Name,Parser Function,Description
+0x01,Login,parseLogin,Device IMEI and serial number
+0x13,Heartbeat,parseHeartbeat,Terminal info battery GSM signal status flags
+0x15,Online Command Response JM01,parseCommandResponseJM01,JM01 device command reply text
+0x19,LBS Alarm,parseLBSAlarm,LBS location + alarm (no Date/Time in packet)
+0x21,Online Command Response,parseCommandResponse,Server flag + command response text
+0x22,GPS Location,parseGPSLocation,Date/time GPS coords speed course LBS odometer
+0x26,Alarm,parseAlarm,Date/time + alarm type (GPS alarm)
+0x27,Alarm HVT001,parseAlarmHVT001,HVT001 alarm with optional GPS data
+0x28,LBS Multiple Bases Extension,parseLBSExtension,Date + main base + 6 neighbors + timing/language
+0x2C,WiFi,parseWiFi,Date + LBS block + time leads + WiFi APs (MAC strength SSID)
+0x8A,Time Calibration Request,parseTimeCalibration,Serial number only (device requests time)
+0x8D,Large File Transfer,parseFileTransfer,Voice/file chunk with CRC or MD5
+0x94,Information Transmission,parseInformationTransmission,Sub-protocol: voltage status door ICCID etc
+0x9B,External Device Transfer,parseExternalDeviceTransfer,Transparent data (X3 devices)
+0x9C,External Module Transmission,parseExternalModuleTransmission,Module ID + transparent data (U20)

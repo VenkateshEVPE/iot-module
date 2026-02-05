@@ -3,8 +3,8 @@
  * Based on Concox V5 Protocol Manual
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { getHeaderSize } from '../shared/parser.js';
+import { calculateCRCITU } from '../shared/crc.js';
 
 /**
  * Parse LBS Alarm packet

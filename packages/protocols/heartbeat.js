@@ -2,8 +2,8 @@
  * Heartbeat Protocol Handler (0x13)
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { getHeaderSize } from '../shared/parser.js';
+import { calculateCRCITU } from '../shared/crc.js';
 
 export function parseHeartbeat(packet) {
   const headerSize = getHeaderSize(packet);

@@ -4,8 +4,8 @@
  * For HVT001 devices - voice file transfers
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { getHeaderSize } from '../shared/parser.js';
+import { calculateCRCITU } from '../shared/crc.js';
 import crypto from 'crypto';
 
 /**

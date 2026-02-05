@@ -2,3 +2,4 @@ logs/
 .env
 node_modules/
 *.log
+evpe-node/

@@ -4,7 +4,7 @@
  * Alternative response format for JM01 devices
  */
 
-import { getHeaderSize, isLongPacket } from '@concox/shared/parser.js';
+import { getHeaderSize, isLongPacket } from '../shared/parser.js';
 
 /**
  * Parse Online Command Response JM01 packet

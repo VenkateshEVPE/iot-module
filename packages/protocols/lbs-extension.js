@@ -3,7 +3,7 @@
  * Based on Concox V5 Protocol Manual - Section 4.1 (page 12)
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
+import { getHeaderSize } from '../shared/parser.js';
 
 /**
  * Parse LBS Multiple Bases Extension packet

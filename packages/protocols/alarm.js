@@ -2,8 +2,8 @@
  * Alarm Protocol Handler (0x26)
  */
 
-import { getHeaderSize } from '@concox/shared/parser.js';
-import { calculateCRCITU } from '@concox/shared/crc.js';
+import { getHeaderSize } from '../shared/parser.js';
+import { calculateCRCITU } from '../shared/crc.js';
 
 export function parseAlarm(packet) {
   const headerSize = getHeaderSize(packet);
