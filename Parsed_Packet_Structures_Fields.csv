@@ -1,0 +1,95 @@
+Protocol Number,Packet Name,Field Path,Data Type,Description
+0x01,Login,imei,string,Device IMEI (from 8 bytes)
+0x01,Login,serialNumber,number,16-bit serial
+0x01,Login,imeiBytes,Buffer,Raw 8-byte IMEI
+0x13,Heartbeat,terminalInfo,number,Raw terminal info byte
+0x13,Heartbeat,batteryLevel,number,0-6 (No Power to Full)
+0x13,Heartbeat,gsmSignal,number,0-4 (no signal to strong)
+0x13,Heartbeat,info.oilElectricityDisconnected,boolean,Oil and electricity disconnected
+0x13,Heartbeat,info.gpsTracking,boolean,GPS tracking on
+0x13,Heartbeat,info.charging,boolean,Charging
+0x13,Heartbeat,info.accHigh,boolean,ACC high
+0x13,Heartbeat,info.defenseActivated,boolean,Defense activated
+0x13,Heartbeat,serialNumber,number,16-bit serial
+0x22,GPS Location,datetime,object,"year month day hour minute second (year = 2000 + byte)"
+0x22,GPS Location,satellites,number,GPS satellite count
+0x22,GPS Location,latitude,number,Signed decimal degrees
+0x22,GPS Location,longitude,number,Signed decimal degrees
+0x22,GPS Location,speed,number,Speed
+0x22,GPS Location,course,number,Course 0-360
+0x22,GPS Location,gpsPositioned,boolean,GPS has been positioned
+0x22,GPS Location,lbs,object,"mcc mnc lac cellId"
+0x22,GPS Location,acc,number | null,ACC status
+0x22,GPS Location,dataUploadMode,number | null,Upload mode code
+0x22,GPS Location,mileage,number | null,Odometer in meters
+0x26,Alarm,datetime,object,year month day hour minute second
+0x26,Alarm,alarmType,string,e.g. SOS Power Cut Alarm Vibration Alarm
+0x26,Alarm,alarmByte,number,Raw alarm code
+0x26,Alarm,serialNumber,number,16-bit serial
+0x19,LBS Alarm,lbs,object,"mcc mnc lac cellId (hex string)"
+0x19,LBS Alarm,terminalInfo,number,Terminal info byte
+0x19,LBS Alarm,voltageLevel,number,Voltage level
+0x19,LBS Alarm,gsmSignal,number,GSM signal strength
+0x19,LBS Alarm,alarmType,string,Alarm type name
+0x19,LBS Alarm,alarmByte,number,Raw alarm code
+0x19,LBS Alarm,language,string,no_reply | Chinese | English
+0x19,LBS Alarm,languageByte,number,Language byte
+0x19,LBS Alarm,serialNumber,number,16-bit serial
+0x27,Alarm HVT001,datetime,string,YYYY-MM-DD HH:mm:ss
+0x27,Alarm HVT001,gpsData,object | null,"latitude longitude speed course satellites positioned"
+0x27,Alarm HVT001,alarmType,string,Alarm type name
+0x27,Alarm HVT001,alarmByte,number,Raw alarm code
+0x27,Alarm HVT001,serialNumber,number,16-bit serial
+0x28,LBS Extension,datetime,string,YYYY-MM-DD HH:mm:ss
+0x28,LBS Extension,datetimeRaw,object,year month day hour minute second
+0x28,LBS Extension,mainBase,object,"mcc mnc lac cellId rssi"
+0x28,LBS Extension,neighbors,array,"6 items: index lac cellId rssi each"
+0x28,LBS Extension,timingAdvance,number,Timing advance
+0x28,LBS Extension,language,number,LANGUAGE 2 bytes
+0x28,LBS Extension,serialNumber,number,16-bit serial
+0x2C,WiFi,datetime,string,YYYY-MM-DD HH:mm:ss
+0x2C,WiFi,datetimeRaw,object,year month day hour minute second
+0x2C,WiFi,lbs.mainBase,object,"mcc mnc lac cellId rssi"
+0x2C,WiFi,lbs.neighbors,array,"6 items: index lac cellId rssi each"
+0x2C,WiFi,timeLeads,number,Time leads
+0x2C,WiFi,wifiCount,number,Number of WiFi APs
+0x2C,WiFi,accessPoints,array,"Each: index mac signal signalStrength ssidLength ssid"
+0x2C,WiFi,serialNumber,number,16-bit serial
+0x21,Command Response,serverFlag,string,4-byte hex
+0x21,Command Response,responseLength,number,Declared length
+0x21,Command Response,actualResponseLength,number,Actual available length
+0x21,Command Response,response,string,Response text ASCII
+0x21,Command Response,serialNumber,number,16-bit serial
+0x15,Command Response JM01,responseLength,number,Response length
+0x15,Command Response JM01,response,string,Response text ASCII
+0x15,Command Response JM01,serialNumber,number,16-bit serial
+0x8A,Time Calibration,serialNumber,number,16-bit serial
+0x94,Information Transmission,subProtocol,number,Sub-protocol number
+0x94,Information Transmission,data,object,"Varies: type voltage | status | door | voltage_mileage | iccid | fuel_sensor | unknown"
+0x94,Information Transmission,data.type,string,voltage | status | door | iccid | fuel_sensor | unknown
+0x94,Information Transmission,data.voltage,number,When type=voltage (V)
+0x94,Information Transmission,data.status,object,When type=status key-value pairs
+0x94,Information Transmission,data.doorOpen,boolean,When type=door
+0x94,Information Transmission,data.iccid,string,When type=iccid
+0x8D,File Transfer,fileType,string,Voice file (monitoring) etc
+0x8D,File Transfer,fileTypeRaw,number,Raw file type byte
+0x8D,File Transfer,fileLength,number,Total file length
+0x8D,File Transfer,errorCheckType,string,CRC | MD5
+0x8D,File Transfer,errorCheck,number | string,CRC value or MD5 hex
+0x8D,File Transfer,startPosition,number,Start position in file
+0x8D,File Transfer,currentContentLength,number,Length of this chunk
+0x8D,File Transfer,contentLength,number,content buffer length
+0x8D,File Transfer,content,Buffer,Raw content
+0x8D,File Transfer,flagBit,object | null,"type datetime|serial value raw?"
+0x8D,File Transfer,serialNumber,number,16-bit serial
+0x8D,File Transfer,isComplete,boolean,True if all bytes received
+0x8D,File Transfer,progress,string,e.g. 42.50%
+0x9B,External Device,dataLength,number,Data length
+0x9B,External Device,transparentData,string,Hex string
+0x9B,External Device,transparentDataRaw,Buffer,Raw buffer
+0x9B,External Device,serialNumber,number,16-bit serial
+0x9C,External Module,moduleId,number,Module ID
+0x9C,External Module,dataLength,number,Data length
+0x9C,External Module,transparentData,string,Hex string
+0x9C,External Module,transparentDataRaw,Buffer,Raw buffer
+0x9C,External Module,serialNumber,number,16-bit serial
