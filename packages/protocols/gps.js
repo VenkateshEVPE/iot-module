@@ -28,11 +28,14 @@ export function parseGPSLocation(packet) {
   const byte2 = courseStatus & 0xFF;
   const course = ((byte1 & 0x03) << 8) | byte2;
   const gpsPositioned = (byte1 & 0x10) !== 0;
-  const latitudeNS = (byte1 & 0x04) !== 0 ? "S" : "N";
-  const longitudeEW = (byte1 & 0x08) !== 0 ? "W" : "E";
+  // Bit meanings: bit3 (0x08) East/West, bit2 (0x04) South/North.
+  // Interpretation: bit3 == 0 => East, bit3 == 1 => West
+  //                 bit2 == 1 => North, bit2 == 0 => South
+  const latitudePositive = (byte1 & 0x04) !== 0; // true => North
+  const longitudePositive = (byte1 & 0x08) === 0; // true => East
 
-  const finalLatitude = latitudeNS === "S" ? -latitude : latitude;
-  const finalLongitude = longitudeEW === "W" ? -longitude : longitude;
+  const finalLatitude = latitudePositive ? latitude : -latitude;
+  const finalLongitude = longitudePositive ? longitude : -longitude;
 
   const mcc = packet.readUInt16BE(dataStart + 18);
   const mnc = packet[dataStart + 20];

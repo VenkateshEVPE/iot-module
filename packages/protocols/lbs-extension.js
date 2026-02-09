@@ -37,6 +37,7 @@ export function parseLBSExtension(packet) {
 
   // 6 neighbors: each 6 bytes (LAC 2 + CI 3 + RSSI 1)
   const neighbors = [];
+  let neighborsParsed = 0;
   for (let i = 0; i < 6; i++) {
     const offset = dataStart + 15 + i * 6;
     if (offset + 6 > packet.length - 6) break;
@@ -46,10 +47,13 @@ export function parseLBSExtension(packet) {
       cellId: packet.readUIntBE(offset + 2, 3).toString(16).toUpperCase().padStart(6, "0"),
       rssi: packet[offset + 5],
     });
+    neighborsParsed++;
   }
 
-  const timingAdvance = packet[dataStart + 51];
-  const language = packet.readUInt16BE(dataStart + 52);
+  // timingAdvance and language follow the neighbors block
+  const afterNeighborsOffset = dataStart + 15 + neighborsParsed * 6;
+  const timingAdvance = packet[afterNeighborsOffset];
+  const language = packet.readUInt16BE(afterNeighborsOffset + 1);
   const serialNumber = packet.readUInt16BE(packet.length - 6);
 
   return {

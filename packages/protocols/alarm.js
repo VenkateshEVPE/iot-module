@@ -29,6 +29,7 @@ export function parseAlarm(packet) {
     0x0F: "External Low Battery Protection", 0x10: "SIM Change Notice",
     0x11: "Power Off Alarm", 0x13: "Disassemble Alarm", 0x14: "Door Alarm",
     0x19: "Internal Low Battery Alarm", 0x20: "Sleep Mode Alarm", 0x23: "Fall Alarm",
+    0x32: "Pull Alarm",
     0xFE: "ACC On Alarm", 0xFF: "ACC Off Alarm",
   };
 

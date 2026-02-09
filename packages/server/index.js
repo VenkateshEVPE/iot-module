@@ -5,20 +5,18 @@
 
 import net from "net";
 import dotenv from "dotenv";
-import { parsePacket, getProtocolName, PROTOCOL_NUMBERS } from "../shared/index.js";
+import {
+  parsePacket,
+  getProtocolName,
+  PROTOCOL_NUMBERS,
+} from "../shared/index.js";
 
 // Protocol handlers
 import { parseLogin, createLoginAck } from "../protocols/login.js";
-import {
-  parseHeartbeat,
-  createHeartbeatAck,
-} from "../protocols/heartbeat.js";
+import { parseHeartbeat, createHeartbeatAck } from "../protocols/heartbeat.js";
 import { parseGPSLocation } from "../protocols/gps.js";
 import { parseAlarm, createAlarmAck } from "../protocols/alarm.js";
-import {
-  parseLBSAlarm,
-  createLBSAlarmAck,
-} from "../protocols/lbs-alarm.js";
+import { parseLBSAlarm, createLBSAlarmAck } from "../protocols/lbs-alarm.js";
 import { parseLBSExtension } from "../protocols/lbs-extension.js";
 import { parseWiFi, createWiFiResponse } from "../protocols/wifi.js";
 import { parseCommandResponse } from "../protocols/command-response.js";
@@ -112,7 +110,7 @@ class ConcoxV5Server {
       log(
         `🔌 Connection closed: ${clientInfo.id}${
           socket.deviceImei ? ` (IMEI: ${socket.deviceImei})` : ""
-        }`
+        }`,
       );
       if (socket.deviceImei) {
         this.clients.delete(socket.deviceImei);
@@ -138,7 +136,7 @@ class ConcoxV5Server {
 
     log(
       `📦 Received packet from ${socket.deviceImei || clientInfo.id}`,
-      packetInfo
+      packetInfo,
     );
 
     // Debug: Log all protocol numbers to catch any unhandled command responses
@@ -147,7 +145,7 @@ class ConcoxV5Server {
         `🔍 DEBUG: Command response protocol detected: 0x${protocolNumber
           .toString(16)
           .padStart(2, "0")
-          .toUpperCase()}`
+          .toUpperCase()}`,
       );
     }
 
@@ -300,12 +298,12 @@ class ConcoxV5Server {
       const locationData = {
         imei: socket.deviceImei || "unknown",
         timestamp: `${data.datetime.year}-${String(
-          data.datetime.month
+          data.datetime.month,
         ).padStart(2, "0")}-${String(data.datetime.day).padStart(
           2,
-          "0"
+          "0",
         )} ${String(data.datetime.hour).padStart(2, "0")}:${String(
-          data.datetime.minute
+          data.datetime.minute,
         ).padStart(2, "0")}:${String(data.datetime.second).padStart(2, "0")}`,
         latitude: data.latitude.toFixed(6),
         longitude: data.longitude.toFixed(6),
@@ -353,12 +351,12 @@ class ConcoxV5Server {
         imei: socket.deviceImei || "unknown",
         alarmType: data.alarmType,
         timestamp: `${data.datetime.year}-${String(
-          data.datetime.month
+          data.datetime.month,
         ).padStart(2, "0")}-${String(data.datetime.day).padStart(
           2,
-          "0"
+          "0",
         )} ${String(data.datetime.hour).padStart(2, "0")}:${String(
-          data.datetime.minute
+          data.datetime.minute,
         ).padStart(2, "0")}:${String(data.datetime.second).padStart(2, "0")}`,
       });
 
@@ -583,7 +581,7 @@ class ConcoxV5Server {
 
       const response = createExternalModuleResponse(
         data.serialNumber,
-        data.moduleId
+        data.moduleId,
       );
       socket.write(response);
     } catch (error) {
@@ -642,10 +640,10 @@ class ConcoxV5Server {
           voltage >= 12.0
             ? "Good"
             : voltage >= 11.5
-            ? "Low"
-            : voltage >= 10.5
-            ? "Critical"
-            : "Very Low";
+              ? "Low"
+              : voltage >= 10.5
+                ? "Critical"
+                : "Very Low";
 
         // Store battery voltage in client data
         const clientData = this.clients.get(imei);
@@ -840,7 +838,7 @@ class ConcoxV5Server {
    */
   configureBatteryReporting(imei, intervalMinutes = 30) {
     log(
-      `📤 Configuring battery reporting every ${intervalMinutes} minutes for ${imei}`
+      `📤 Configuring battery reporting every ${intervalMinutes} minutes for ${imei}`,
     );
     // Note: This command may not be supported by all models
     // If device returns "invalid command", this feature is not available
@@ -879,10 +877,10 @@ class ConcoxV5Server {
         clientData.lastBatteryVoltage >= 12.0
           ? "Good"
           : clientData.lastBatteryVoltage >= 11.5
-          ? "Low"
-          : clientData.lastBatteryVoltage >= 10.5
-          ? "Critical"
-          : "Very Low",
+            ? "Low"
+            : clientData.lastBatteryVoltage >= 10.5
+              ? "Critical"
+              : "Very Low",
       lastUpdated: clientData.lastBatteryVoltageAt,
     };
   }

@@ -53,6 +53,7 @@ export function parseLBSAlarm(packet) {
     0x19: "Internal low Battery Alarm",
     0x20: "Sleep mode alarm",
     0x23: "Fall alarm",
+    0x32: "Pull alarm",
     0xFE: "ACC On alarm",
     0xFF: "ACC Off alarm",
   };

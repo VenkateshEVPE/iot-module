@@ -37,6 +37,7 @@ export function parseWiFi(packet) {
     rssi: packet[dataStart + 14],
   };
   const neighbors = [];
+  let neighborsParsed = 0;
   for (let i = 0; i < 6; i++) {
     const offset = dataStart + 15 + i * 6;
     if (offset + 6 > serialStart) break;
@@ -46,14 +47,17 @@ export function parseWiFi(packet) {
       cellId: packet.readUIntBE(offset + 2, 3).toString(16).toUpperCase().padStart(6, "0"),
       rssi: packet[offset + 5],
     });
+    neighborsParsed++;
   }
 
-  const timeLeads = packet[dataStart + 51];
-  const wifiCount = packet[dataStart + 52];
+  // timeLeads and wifiCount come after main base + neighbors block.
+  const afterNeighborsOffset = dataStart + 15 + neighborsParsed * 6;
+  const timeLeads = packet[afterNeighborsOffset] ?? 0;
+  const wifiCount = packet[afterNeighborsOffset + 1] ?? 0;
 
   // Per AP: MAC(6) + strength(1) + SSID length(1) + SSID(0-32 bytes)
   const accessPoints = [];
-  let offset = dataStart + 53;
+  let offset = afterNeighborsOffset + 2;
   for (let i = 0; i < wifiCount && offset + 8 <= serialStart; i++) {
     const macBytes = packet.slice(offset, offset + 6);
     const mac = Array.from(macBytes)

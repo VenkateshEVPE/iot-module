@@ -66,7 +66,7 @@ npm install @yourusername/concox-server
 
 The repo is structured so the **root** is one installable package. No subpath is needed, so npm works reliably from GitHub.
 
-**One dependency** – use `main` or `code-only` (or any branch):
+**One dependency** – use the branch you need (typically `main`):
 
 ```json
 {
@@ -77,7 +77,6 @@ The repo is structured so the **root** is one installable package. No subpath is
 ```
 
 - **Main branch:** `git+https://github.com/VenkateshEVPE/iot-module.git#main`
-- **code-only branch:** `git+https://github.com/VenkateshEVPE/iot-module.git#code-only`
 
 Then use it as:
 
