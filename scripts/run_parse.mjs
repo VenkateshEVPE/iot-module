@@ -2,8 +2,8 @@ import { parseAlarm } from '../packages/protocols/alarm.js';
 import { parseAlarmHVT001 } from '../packages/protocols/alarm-hvt001.js';
 
 function run() {
-  // sample packet from your log
-  const hex = '787825261A0209061114CF01DBD3430869E777001400090194EA4EB800FFA34002043202008122CC0D0A';
+  // sample packet from your log or passed as CLI arg
+  const hex = process.argv[2] || '787825261A0209061114CF01DBD3430869E777001400090194EA4EB800FFA34002043202008122CC0D0A';
   const packet = Buffer.from(hex, 'hex');
 
   console.log('Raw packet hex:', hex);

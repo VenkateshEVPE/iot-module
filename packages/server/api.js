@@ -21,7 +21,7 @@ export function setupAPI(server, port = 3000) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS"
+      "GET, POST, PUT, DELETE, OPTIONS",
     );
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     if (req.method === "OPTIONS") {
@@ -61,10 +61,10 @@ export function setupAPI(server, port = 3000) {
                 client.lastBatteryVoltage >= 12.0
                   ? "Good"
                   : client.lastBatteryVoltage >= 11.5
-                  ? "Low"
-                  : client.lastBatteryVoltage >= 10.5
-                  ? "Critical"
-                  : "Very Low",
+                    ? "Low"
+                    : client.lastBatteryVoltage >= 10.5
+                      ? "Critical"
+                      : "Very Low",
               lastUpdated: client.lastBatteryVoltageAt,
             };
           }
@@ -78,7 +78,7 @@ export function setupAPI(server, port = 3000) {
             };
           }
           return device;
-        }
+        },
       );
 
       res.json({
@@ -124,10 +124,10 @@ export function setupAPI(server, port = 3000) {
             client.lastBatteryVoltage >= 12.0
               ? "Good"
               : client.lastBatteryVoltage >= 11.5
-              ? "Low"
-              : client.lastBatteryVoltage >= 10.5
-              ? "Critical"
-              : "Very Low",
+                ? "Low"
+                : client.lastBatteryVoltage >= 10.5
+                  ? "Critical"
+                  : "Very Low",
           lastUpdated: client.lastBatteryVoltageAt,
         };
       }
@@ -277,6 +277,61 @@ export function setupAPI(server, port = 3000) {
     }
   });
 
+  // Geofence command helper - send geofence command to device.
+  // Body options:
+  // - rawCommand: string (if provided, sent as-is)
+  // - or build command using fields: action="add"|"remove"|"enable"|"disable", fenceNo (number), lat, lon, radiusMeters, insideOutside ("IN"|"OUT")
+  // Example add command built: "FENCE,ON,0,17.324268,78.421257,200,IN,1#"
+  app.post("/api/devices/:imei/geofence/send", (req, res) => {
+    try {
+      const { imei } = req.params;
+      const {
+        rawCommand,
+        action = "add",
+        fenceNo = 0,
+        lat,
+        lon,
+        radiusMeters,
+        insideOutside = "IN",
+      } = req.body;
+
+      const client = server.clients.get(imei);
+      if (!client) {
+        return res.status(404).json({ success: false, error: "Device not connected", imei });
+      }
+
+      let commandToSend = null;
+      if (rawCommand && typeof rawCommand === "string") {
+        commandToSend = rawCommand;
+      } else {
+        if (action === "add") {
+          if (typeof lat !== "number" || typeof lon !== "number" || typeof radiusMeters !== "number") {
+            return res.status(400).json({ success: false, error: "lat, lon, radiusMeters required for add action" });
+          }
+          commandToSend = `FENCE,ON,${fenceNo},${lat.toFixed(6)},${lon.toFixed(6)},${Math.round(radiusMeters)},${insideOutside},1#`;
+        } else if (action === "remove") {
+          commandToSend = `FENCE,OFF,${fenceNo}#`;
+        } else if (action === "enable") {
+          commandToSend = `FENCE,ENABLE,${fenceNo}#`;
+        } else if (action === "disable") {
+          commandToSend = `FENCE,DISABLE,${fenceNo}#`;
+        } else {
+          return res.status(400).json({ success: false, error: "Unsupported action. Use rawCommand or action=add|remove|enable|disable" });
+        }
+      }
+
+      const sent = server.sendCommand(imei, commandToSend);
+      if (!sent) {
+        return res.status(500).json({ success: false, error: "Failed to send command (device may be disconnected)" });
+      }
+
+      log(`🌐 API: Sent geofence command to ${imei}`, { command: commandToSend });
+      res.json({ success: true, imei, command: commandToSend });
+    } catch (error) {
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
   // Request location (WHERE command)
   app.post("/api/devices/:imei/location", (req, res) => {
     try {
@@ -372,7 +427,7 @@ export function setupAPI(server, port = 3000) {
 
       if (success) {
         log(
-          `🌐 API: Battery reporting configuration for ${imei} (${intervalMinutes} minutes)`
+          `🌐 API: Battery reporting configuration for ${imei} (${intervalMinutes} minutes)`,
         );
         res.json({
           success: true,

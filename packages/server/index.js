@@ -347,17 +347,38 @@ class ConcoxV5Server {
   handleAlarm(socket, packet, clientInfo) {
     try {
       const data = parseAlarm(packet);
+
+      // Try to enrich with HVT001-style fields (gpsData, lbs, terminalInfo) when present
+      let enriched = { ...data };
+      try {
+        const hvt = parseAlarmHVT001(packet);
+        // merge commonly useful fields if available
+        if (hvt.gpsData) enriched.gpsData = hvt.gpsData;
+        if (hvt.lbs) enriched.lbs = hvt.lbs;
+        if (hvt.terminalInfo) enriched.terminalInfo = hvt.terminalInfo;
+      } catch (e) {
+        // ignore if HVT001 parser not applicable
+      }
+
+      // Build timestamp string
+      const ts = `${data.datetime.year}-${String(data.datetime.month).padStart(2, "0")}-${String(
+        data.datetime.day,
+      ).padStart(
+        2,
+        "0",
+      )} ${String(data.datetime.hour).padStart(2, "0")}:${String(
+        data.datetime.minute,
+      ).padStart(2, "0")}:${String(data.datetime.second).padStart(2, "0")}`;
+
       log(`🚨 Alarm`, {
         imei: socket.deviceImei || "unknown",
-        alarmType: data.alarmType,
-        timestamp: `${data.datetime.year}-${String(
-          data.datetime.month,
-        ).padStart(2, "0")}-${String(data.datetime.day).padStart(
-          2,
-          "0",
-        )} ${String(data.datetime.hour).padStart(2, "0")}:${String(
-          data.datetime.minute,
-        ).padStart(2, "0")}:${String(data.datetime.second).padStart(2, "0")}`,
+        alarmType: enriched.alarmType,
+        timestamp: ts,
+        serialNumber: enriched.serialNumber,
+        gpsData: enriched.gpsData,
+        lbs: enriched.lbs,
+        terminalInfo: enriched.terminalInfo,
+        rawHex: packet.toString("hex").toUpperCase(),
       });
 
       const ack = createAlarmAck(data.serialNumber);
