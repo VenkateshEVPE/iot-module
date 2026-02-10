@@ -62,6 +62,7 @@ export function parseLBSAlarm(packet) {
     0x2C: "Sharp Crash Alarm",
     0x32: "Pull alarm",
     0x3E: "Press Button Upload",
+    0x4C: "Sharp Turn Alarm",
     0xFE: "ACC On alarm",
     0xFF: "ACC Off alarm",
   };

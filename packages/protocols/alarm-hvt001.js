@@ -127,6 +127,7 @@ export function parseAlarmHVT001(packet) {
     0x2C: "Sharp Crash Alarm",
     0x32: "Pull Alarm", // documented in v5 protocol
     0x3E: "Press Button Upload",
+    0x4C: "Sharp Turn Alarm",
     0xFE: "ACC On Alarm",
     0xFF: "ACC Off Alarm",
   };
