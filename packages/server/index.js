@@ -441,10 +441,10 @@ class ConcoxV5Server {
       // Check if this matches a pending command
       let matchedCommand = null;
       if (socket.pendingCommands) {
-        matchedCommand = socket.pendingCommands.get(data.serialNumber);
+        matchedCommand = socket.pendingCommands.get(data.serverFlag);
         if (matchedCommand) {
           const responseDelay = responseTime - matchedCommand.sentAt;
-          socket.pendingCommands.delete(data.serialNumber);
+          socket.pendingCommands.delete(data.serverFlag);
           log(`📨 Command Response (0x21) - Matched!`, {
             imei: imei,
             originalCommand: matchedCommand.command,
@@ -706,9 +706,17 @@ class ConcoxV5Server {
 
     const socket = clientData.socket;
     const commandBytes = Buffer.from(command, "ascii");
-    const serverFlag = Buffer.from([0x00, 0x00, 0x00, 0x00]);
-    const language = Buffer.from([0x00, 0x02]); // English
     const serialNumber = Math.floor(Math.random() * 65535);
+    // Encode serialNumber into serverFlag so the device echoes it back in 0x21 response,
+    // allowing reliable correlation between sent command and device response.
+    const serverFlag = Buffer.from([
+      0x00,
+      0x00,
+      (serialNumber >> 8) & 0xff,
+      serialNumber & 0xff,
+    ]);
+    const serverFlagHex = serverFlag.toString("hex").toUpperCase();
+    const language = Buffer.from([0x00, 0x02]); // English
 
     // commandLength = ServerFlag(4) + Command(N) + Language(2)
     const commandLength = 4 + commandBytes.length + 2;
@@ -781,37 +789,35 @@ class ConcoxV5Server {
       command: command,
       hex: packet.toString("hex").toUpperCase(),
       protocol: "0x80",
-      serialNumber: `0x${serialNumber
-        .toString(16)
-        .padStart(4, "0")
-        .toUpperCase()}`,
+      serverFlag: serverFlagHex,
       packetLength: packet.length,
       note: "Waiting for device response (protocol 0x21 or 0x15)",
     });
 
-    // Store command info for tracking responses
+    // Store command keyed by serverFlag — the device echoes serverFlag back in 0x21 response,
+    // not the serial number, so serverFlag is the correct correlation key.
     if (!socket.pendingCommands) {
       socket.pendingCommands = new Map();
     }
-    socket.pendingCommands.set(serialNumber, {
+    socket.pendingCommands.set(serverFlagHex, {
       command: command,
       sentAt: commandSentTime,
       imei: imei,
     });
 
-    // Clean up old pending commands after 60 seconds
+    // Clean up if device never responds
     setTimeout(() => {
-      if (socket.pendingCommands && socket.pendingCommands.has(serialNumber)) {
+      if (socket.pendingCommands && socket.pendingCommands.has(serverFlagHex)) {
         log(`⏱️ Command timeout - no response received`, {
           imei: imei,
           command: command,
-          serialNumber: `0x${serialNumber.toString(16).padStart(4, "0")}`,
+          serverFlag: serverFlagHex,
         });
-        socket.pendingCommands.delete(serialNumber);
+        socket.pendingCommands.delete(serverFlagHex);
       }
     }, 60000);
 
-    return true;
+    return serverFlagHex;
   }
 
   mobilizeVehicle(imei) {
