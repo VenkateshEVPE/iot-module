@@ -49,6 +49,18 @@ dotenv.config();
 
 const PORT = process.env.CONCOX_PORT || 5027;
 
+/**
+ * Key used in pendingCommands — must match sendCommand serverFlag: 0x00,0x00, serial hi, lo.
+ * JM01 0x15 packets have no serverFlag; correlation uses the echoed information serial, which
+ * maps to the same 4 bytes as the second half of the 0x80 serverFlag.
+ */
+function serverFlagHexKeyFromSerial(serialNumber) {
+  const sn = Number(serialNumber) & 0xffff;
+  return Buffer.from([0, 0, (sn >> 8) & 0xff, sn & 0xff])
+    .toString("hex")
+    .toUpperCase();
+}
+
 class ConcoxV5Server {
   constructor() {
     this.server = null;
@@ -508,10 +520,11 @@ class ConcoxV5Server {
       // Check if this matches a pending command
       let matchedCommand = null;
       if (socket.pendingCommands) {
-        matchedCommand = socket.pendingCommands.get(data.serialNumber);
+        const pendingKey = serverFlagHexKeyFromSerial(data.serialNumber);
+        matchedCommand = socket.pendingCommands.get(pendingKey);
         if (matchedCommand) {
           const responseDelay = responseTime - matchedCommand.sentAt;
-          socket.pendingCommands.delete(data.serialNumber);
+          socket.pendingCommands.delete(pendingKey);
           log(`📨 Command Response (JM01 - 0x15) - Matched!`, {
             imei: imei,
             originalCommand: matchedCommand.command,
