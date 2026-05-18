@@ -1,34 +1,62 @@
 /**
- * Logging utility
+ * Logging utility — paths and file logging are configured via .env (see below).
+ *
+ * CONCOX_FILE_LOGGING=true|false  — write daily concox-YYYY-MM-DD.log files
+ * LOG_DIR=./logs                  — relative to process.cwd() (host app root), not node_modules
+ * CONCOX_LOG_RETENTION_DAYS=7     — days of concox-*.log files to keep
+ * CONCOX_LOG_TO_CONSOLE=true|false — print library log() to stdout (default true). Set false when
+ *                                    the host app also logs the same traffic to avoid duplicate lines.
  */
 
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+dotenv.config();
+
+function resolveLogDir() {
+  const cwd = process.cwd();
+  const raw = process.env.LOG_DIR?.trim();
+  if (!raw) {
+    return path.join(cwd, "logs");
+  }
+  return path.isAbsolute(raw) ? raw : path.resolve(cwd, raw);
+}
+
+const LOG_DIR = resolveLogDir();
+process.env.LOG_DIR = LOG_DIR;
 
 const FILE_LOGGING_ENABLED =
   String(process.env.CONCOX_FILE_LOGGING || "false").toLowerCase() === "true";
-const LOG_DIR = process.env.LOG_DIR || path.join(__dirname, "../../logs");
+const LOG_TO_CONSOLE =
+  String(process.env.CONCOX_LOG_TO_CONSOLE ?? "true").toLowerCase() !== "false";
 const LOG_RETENTION_DAYS = Number.parseInt(
   process.env.CONCOX_LOG_RETENTION_DAYS || "7",
   10,
 );
 let lastCleanupDate = null;
 
-// Ensure log directory exists only when file logging is enabled.
 if (FILE_LOGGING_ENABLED && !fs.existsSync(LOG_DIR)) {
   fs.mkdirSync(LOG_DIR, { recursive: true });
 }
 
 /**
- * Get the log file path for the current date
- * Creates a new file name each day: concox-YYYY-MM-DD.log
+ * Resolved absolute log directory (also set on process.env.LOG_DIR).
  */
+export function getLogDir() {
+  return LOG_DIR;
+}
+
+export function isFileLoggingEnabled() {
+  return FILE_LOGGING_ENABLED;
+}
+
+export function isLogToConsoleEnabled() {
+  return LOG_TO_CONSOLE;
+}
+
 function getLogFile() {
-  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0];
   return path.join(LOG_DIR, `concox-${today}.log`);
 }
 
@@ -68,16 +96,16 @@ export function log(message, data = null) {
   const timestamp = new Date().toISOString();
   const logMessage = `[${timestamp}] ${message}`;
 
-  // Console output
-  console.log(logMessage);
-  if (data) {
-    console.log(JSON.stringify(data, null, 2));
+  if (LOG_TO_CONSOLE) {
+    console.log(logMessage);
+    if (data) {
+      console.log(JSON.stringify(data, null, 2));
+    }
   }
 
   if (FILE_LOGGING_ENABLED) {
     cleanupOldLogs();
 
-    // File output - calculate log file dynamically for daily rotation
     const logFile = getLogFile();
     const fileMessage = data
       ? `${logMessage}\n${JSON.stringify(data, null, 2)}\n`

@@ -43,7 +43,7 @@ import {
 } from "../protocols/time-calibration.js";
 import { parseInformationTransmission } from "../protocols/information-transmission.js";
 import { calculateCRCITU } from "../shared/index.js";
-import { log } from "./logger.js";
+import { log, getLogDir, isFileLoggingEnabled } from "./logger.js";
 
 dotenv.config();
 
@@ -80,6 +80,9 @@ class ConcoxV5Server {
 
       this.server.listen(PORT, () => {
         log(`📡 Concox V5 Server started on port ${PORT}`);
+        if (isFileLoggingEnabled()) {
+          log(`📁 File logging: ${getLogDir()}`);
+        }
         resolve();
       });
     });
