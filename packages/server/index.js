@@ -42,7 +42,7 @@ import {
   createTimeCalibrationResponse,
 } from "../protocols/time-calibration.js";
 import { parseInformationTransmission } from "../protocols/information-transmission.js";
-import { calculateCRCITU } from "../shared/index.js";
+import { calculateCRCITU, classifyCommandResponse } from "../shared/index.js";
 import { log, getLogDir, isFileLoggingEnabled } from "./logger.js";
 
 dotenv.config();
@@ -483,25 +483,22 @@ class ConcoxV5Server {
         });
       }
 
-      // Check if response indicates success or failure
-      const responseUpper = data.response.toUpperCase();
-      if (
-        responseUpper.includes("OK") ||
-        responseUpper.includes("SUCCESS") ||
-        responseUpper.includes("RELAY")
-      ) {
+      const outcome = classifyCommandResponse(data.response);
+      if (outcome === "success") {
         log(`✅ Command executed successfully: ${data.response}`);
-      } else if (
-        responseUpper.includes("ERROR") ||
-        responseUpper.includes("FAIL") ||
-        responseUpper.includes("INVALID")
-      ) {
+      } else if (outcome === "failure") {
         const errorNote = matchedCommand
           ? `Command "${matchedCommand.command}" not recognized. Try using PARAM# for device parameters, or check device manual for supported commands.`
           : "Device returned error response";
         log(`❌ Command failed: ${data.response}`, {
           imei: imei,
           note: errorNote,
+        });
+      } else if (outcome === "deferred") {
+        log(`⏳ Command deferred until GPS fix: ${data.response}`, {
+          imei: imei,
+          originalCommand: matchedCommand ? matchedCommand.command : null,
+          note: "Device accepted the command but will execute after GPS lock",
         });
       } else {
         log(`ℹ️ Command response received: ${data.response}`);
@@ -549,20 +546,17 @@ class ConcoxV5Server {
         });
       }
 
-      // Check if response indicates success or failure
-      const responseUpper = data.response.toUpperCase();
-      if (
-        responseUpper.includes("OK") ||
-        responseUpper.includes("SUCCESS") ||
-        responseUpper.includes("RELAY")
-      ) {
+      const outcome = classifyCommandResponse(data.response);
+      if (outcome === "success") {
         log(`✅ Command executed successfully: ${data.response}`);
-      } else if (
-        responseUpper.includes("ERROR") ||
-        responseUpper.includes("FAIL") ||
-        responseUpper.includes("INVALID")
-      ) {
+      } else if (outcome === "failure") {
         log(`❌ Command failed: ${data.response}`);
+      } else if (outcome === "deferred") {
+        log(`⏳ Command deferred until GPS fix: ${data.response}`, {
+          imei: imei,
+          originalCommand: matchedCommand ? matchedCommand.command : null,
+          note: "Device accepted the command but will execute after GPS lock",
+        });
       } else {
         log(`ℹ️ Command response received: ${data.response}`);
       }

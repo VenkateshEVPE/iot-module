@@ -3,6 +3,7 @@
  */
 
 export * from './crc.js';
+export * from './command-response.js';
 export * from './imei.js';
 export * from './parser.js';
 export * from './protocols.js';
