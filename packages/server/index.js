@@ -128,13 +128,52 @@ class ConcoxV5Server {
         }`,
       );
       if (socket.deviceImei) {
-        this.clients.delete(socket.deviceImei);
+        const active = this.clients.get(socket.deviceImei);
+        // Only remove if this socket is still the active one. When a device
+        // reconnects, a newer socket replaces the map entry; the old socket's
+        // close event must not delete the live connection.
+        if (active && active.socket === socket) {
+          this.clients.delete(socket.deviceImei);
+        }
       }
+    });
+  }
+
+  /**
+   * If the socket already has an IMEI but clients map lost the entry (e.g. stale
+   * socket close deleted it), restore the registry so sendCommand() works again.
+   */
+  ensureClientRegistered(socket, clientInfo) {
+    const imei = socket.deviceImei;
+    if (!imei) return;
+
+    const existing = this.clients.get(imei);
+    if (existing) {
+      return;
+    }
+
+    this.clients.set(imei, {
+      socket,
+      clientInfo,
+      connectedAt: new Date().toISOString(),
+      lastBatteryVoltage: null,
+      lastBatteryVoltageAt: null,
+      lastMileage: null,
+      lastMileageAt: null,
+    });
+
+    log(`🔄 Client registry restored for ${imei}`, {
+      client: clientInfo.id,
+      note: "Socket had IMEI but clients map was empty — commands can work again",
     });
   }
 
   handlePacket(socket, packet, protocolNumber, clientInfo) {
     if (!packet) return;
+
+    if (socket.deviceImei) {
+      this.ensureClientRegistered(socket, clientInfo);
+    }
 
     const packetHex = packet.toString("hex").toUpperCase();
     const protocolName = getProtocolName(protocolNumber);
@@ -239,6 +278,14 @@ class ConcoxV5Server {
     });
 
     socket.deviceImei = imei;
+    const existing = this.clients.get(imei);
+    if (existing && existing.socket !== socket) {
+      try {
+        existing.socket.destroy();
+      } catch (_) {
+        // ignore — stale connection cleanup
+      }
+    }
     this.clients.set(imei, {
       socket: socket,
       clientInfo: clientInfo,
